@@ -19,9 +19,9 @@ namespace BLL
         }
 
         //Métodos que retornan la lista en el Imprimir de las Consultas (Reportes).
-        public static List<Cliente> FClientes(Expression<Func<Cliente, bool>> filtro)
+        public static List<Cliente> FClientes()
         {
-            filtro = p => true;
+            Expression<Func<Cliente, bool>> filtro = p => true;
             Repositorio<Cliente> repositorio = new Repositorio<Cliente>();
             List<Cliente> list = new List<Cliente>();
 
@@ -30,9 +30,9 @@ namespace BLL
             return list;
         }
 
-        public static List<Departamento> FDepartamentos(Expression<Func<Departamento, bool>> filtro)
+        public static List<Departamento> FDepartamentos()
         {
-            filtro = p => true;
+            Expression<Func<Departamento, bool>> filtro = p => true;
             Repositorio<Departamento> repositorio = new Repositorio<Departamento>();
             List<Departamento> list = new List<Departamento>();
 
@@ -41,9 +41,9 @@ namespace BLL
             return list;
         }
 
-        public static List<Entrada> FEntradas(Expression<Func<Entrada, bool>> filtro)
+        public static List<Entrada> FEntradas()
         {
-            filtro = p => true;
+            Expression<Func<Entrada, bool>> filtro = p => true;
             Repositorio<Entrada> repositorio = new Repositorio<Entrada>();
             List<Entrada> list = new List<Entrada>();
 
@@ -52,9 +52,9 @@ namespace BLL
             return list;
         }
 
-        public static List<Factura> FFacturas(Expression<Func<Factura, bool>> filtro)
+        public static List<Factura> FFacturas()
         {
-            filtro = p => true;
+            Expression<Func<Factura, bool>> filtro = p => true;
             Repositorio<Factura> repositorio = new Repositorio<Factura>();
             List<Factura> list = new List<Factura>();
 
@@ -63,9 +63,9 @@ namespace BLL
             return list;
         }
 
-        public static List<Pago> FPagos(Expression<Func<Pago, bool>> filtro)
+        public static List<Pago> FPagos()
         {
-            filtro = p => true;
+            Expression<Func<Pago, bool>> filtro = p => true;
             Repositorio<Pago> repositorio = new Repositorio<Pago>();
             List<Pago> list = new List<Pago>();
 
@@ -74,9 +74,9 @@ namespace BLL
             return list;
         }
 
-        public static List<Producto> FProductos(Expression<Func<Producto, bool>> filtro)
+        public static List<Producto> FProductos()
         {
-            filtro = p => true;
+            Expression<Func<Producto, bool>> filtro = p => true;
             Repositorio<Producto> repositorio = new Repositorio<Producto>();
             List<Producto> list = new List<Producto>();
 
@@ -85,9 +85,9 @@ namespace BLL
             return list;
         }
 
-        public static List<Usuario> FUsuarios(Expression<Func<Usuario, bool>> filtro)
+        public static List<Usuario> FUsuarios()
         {
-            filtro = p => true;
+            Expression<Func<Usuario, bool>> filtro = p => true;
             Repositorio<Usuario> repositorio = new Repositorio<Usuario>();
             List<Usuario> list = new List<Usuario>();
 
