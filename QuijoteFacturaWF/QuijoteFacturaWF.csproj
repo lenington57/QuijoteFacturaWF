@@ -99,6 +99,14 @@
     <Content Include="Registros\PagoWF.aspx" />
     <Content Include="Registros\ProductoWF.aspx" />
     <Content Include="Registros\UsuarioWF.aspx" />
+    <Content Include="Resources\5e903e1ef9904ab5a77e9568220263b1.jpg" />
+    <Content Include="Resources\comprador.jpg" />
+    <Content Include="Resources\conf_producto.png" />
+    <Content Include="Resources\Dinero_43.jpg" />
+    <Content Include="Resources\im-html-o3884083.jpg" />
+    <Content Include="Resources\mejores-herramientas-factuacion-electronica-810x607.jpg" />
+    <Content Include="Resources\new-product-seal_23-2147503128.jpg" />
+    <Content Include="Resources\Usuario.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -266,6 +274,7 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="Utilitarios\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -283,7 +292,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Reportes\" />
-    <Folder Include="Utilitarios\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

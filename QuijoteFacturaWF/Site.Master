@@ -36,24 +36,43 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Registros
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Clientes</a>
-                                <a class="dropdown-item" href="#">Usuarios</a>
+                                <a class="dropdown-item" href="/Registros/ClienteWF.aspx">Clientes</a>
+                                <a class="dropdown-item" href="/Registros/DepartamentoWF.aspx">Departamentos</a>
+                                <a class="dropdown-item" href="/Registros/EntradaWF.aspx">Entradas</a>
+                                <a class="dropdown-item" href="/Registros/FacturaWF.aspx">Facturas</a>
+                                <a class="dropdown-item" href="/Registros/PagoWF.aspx">Pagos</a>
+                                <a class="dropdown-item" href="/Registros/ProductoWF.aspx">Productos</a>
+                                <a class="dropdown-item" href="/Registros/UsuarioWF.aspx">Usuarios</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Consultas
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Clientes</a>
-                                <a class="dropdown-item" href="#">Usuarios</a>
+                                <a class="dropdown-item" href="/Consultas/CClienteWF.aspx">Clientes</a>
+                                <a class="dropdown-item" href="/Consultas/CDepartamentoWF.aspx">Departamentos</a>
+                                <a class="dropdown-item" href="/Consultas/CEntradaWF.aspx">Entradas</a>
+                                <a class="dropdown-item" href="/Consultas/CFacturaWF.aspx">Facturas</a>
+                                <a class="dropdown-item" href="/Consultas/CPagoWF.aspx">Pagos</a>
+                                <a class="dropdown-item" href="/Consultas/CProductoWF.aspx">Productos</a>
+                                <a class="dropdown-item" href="/Consultas/CUsuarioWF.aspx">Usuarios</a>
                             </div>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="#">Ayuda <span class="sr-only">(current)</span></a>
+                        </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <li>
+                            <asp:Button class="btn btn-danger" ID="logoutButton" runat="server" Text="Salir" />
                         </li>
                     </ul>
                 </div>
-            </nav>
+            </nav>            
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4" style="font-weight: bold">Quijote Factura</h1>
+                    <p class="lead">Facturas desde la comodidad de tu Hogar.</p>
+                </div>
+            </div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
             <hr />

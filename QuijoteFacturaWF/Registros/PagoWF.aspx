@@ -9,16 +9,19 @@
                 <div class="card-header text-uppercase text-center text-primary">Pago</div>
                 <article class="card-body">
                     <form>
-                        <div class="col-md-6 col-md-offset-3">
-                            <div class="container">
-                                <div class="form-group">
-                                    <asp:Label ID="Label3" runat="server" Text="Id"></asp:Label>
-                                    <asp:Button class="btn btn-info btn-sm" ID="BuscarButton" runat="server" Text="Buscar" />
-                                    <asp:TextBox class="form-control" ID="pagoIdTextBox" Text="0" type="number" runat="server"></asp:TextBox>
-                                </div>
+                        <div class="form-row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="form-group col-md-3">
+                                <asp:Label ID="Label2" runat="server" Text="Id"></asp:Label>
+                                <asp:TextBox class="form-control" ID="pagoIdTextBox" Text="0" type="number" runat="server" Width="110px"></asp:TextBox>
+                            </div>
+
+                            <div class="col-lg-1 p-0">
+                                <asp:LinkButton ID="BuscarLinkButton" CssClass="btn btn-info mt-4" runat="server" OnClick="BuscarLinkButton_Click">
+                                <span class="fas fa-search"></span>Buscar
+                                </asp:LinkButton>
                             </div>
                         </div>
-                        <asp:Image ID="UsuarioImage" runat="server" Height="260px" ImageUrl="~/Resources/Dinero_43.jpg" runat="server" Width="265px" AlternateText="Imagen no disponible" ImageAlign="right" />
+                        <asp:Image ID="UsuarioImage" runat="server" Height="236px" ImageUrl="~/Resources/Dinero_43.jpg" runat="server" Width="206px" AlternateText="Imagen no disponible" ImageAlign="right" />
                         <div class="col-md-6 col-md-offset-3">
                             <div class="container">
                                 <div class="form-group">
@@ -47,9 +50,9 @@
                         <div class="panel-footer">
                             <div class="text-center">
                                 <div class="form-group" style="display: inline-block">
-                                    <asp:Button class="btn btn-primary btn-sm" ID="nuevoButton" runat="server" Text="Nuevo" />
-                                    <asp:Button class="btn btn-success btn-sm" ID="guardarButton" runat="server" Text="Guardar" />
-                                    <asp:Button class="btn btn-danger btn-sm" ID="eliminarutton" runat="server" Text="Eliminar" />
+                                    <asp:Button class="btn btn-primary btn-sm" ID="nuevoButton" runat="server" Text="Nuevo" OnClick="nuevoButton_Click" />
+                                    <asp:Button class="btn btn-success btn-sm" ID="guardarButton" runat="server" Text="Guardar" OnClick="guardarButton_Click" />
+                                    <asp:Button class="btn btn-danger btn-sm" ID="eliminarutton" runat="server" Text="Eliminar" OnClick="eliminarutton_Click" />
                                 </div>
                             </div>
                         </div>
@@ -60,4 +63,7 @@
             <!-- card.// -->
     </div>
     <br>
+</div>
+     </div>
+     </div>
 </asp:Content>

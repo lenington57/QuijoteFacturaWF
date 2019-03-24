@@ -13,5 +13,14 @@ namespace QuijoteFacturaWF.Registros
         {
 
         }
+        //Métodos
+        //Programación de los Botones
+
+        //Eventos de los Objetos
+        protected void productoIdTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
+
 }

@@ -13,22 +13,13 @@ namespace QuijoteFacturaWF.Registros {
     public partial class ProductoWF {
         
         /// <summary>
-        /// Label3 control.
+        /// Label5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
-        
-        /// <summary>
-        /// BuscarButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BuscarButton;
+        protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
         /// productoIdTextBox control.
@@ -38,6 +29,15 @@ namespace QuijoteFacturaWF.Registros {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox productoIdTextBox;
+        
+        /// <summary>
+        /// BuscarLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton BuscarLinkButton;
         
         /// <summary>
         /// UsuarioImage control.
@@ -103,13 +103,13 @@ namespace QuijoteFacturaWF.Registros {
         protected global::System.Web.UI.WebControls.TextBox descripcionTextBox;
         
         /// <summary>
-        /// Label1 control.
+        /// Label3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
         /// costoTextBox control.
@@ -121,13 +121,13 @@ namespace QuijoteFacturaWF.Registros {
         protected global::System.Web.UI.WebControls.TextBox costoTextBox;
         
         /// <summary>
-        /// Label2 control.
+        /// Label6 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label Label6;
         
         /// <summary>
         /// precioTextBox control.
@@ -139,13 +139,13 @@ namespace QuijoteFacturaWF.Registros {
         protected global::System.Web.UI.WebControls.TextBox precioTextBox;
         
         /// <summary>
-        /// Label8 control.
+        /// Label11 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
+        protected global::System.Web.UI.WebControls.Label Label11;
         
         /// <summary>
         /// porGanTextBox control.
@@ -157,13 +157,13 @@ namespace QuijoteFacturaWF.Registros {
         protected global::System.Web.UI.WebControls.TextBox porGanTextBox;
         
         /// <summary>
-        /// Label9 control.
+        /// Label12 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label9;
+        protected global::System.Web.UI.WebControls.Label Label12;
         
         /// <summary>
         /// canInvTextBox control.

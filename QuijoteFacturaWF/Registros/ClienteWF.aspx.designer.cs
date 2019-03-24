@@ -13,22 +13,13 @@ namespace QuijoteFacturaWF.Registros {
     public partial class ClienteWF {
         
         /// <summary>
-        /// Label3 control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
-        
-        /// <summary>
-        /// BuscarButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BuscarButton;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// clienteIdTextBox control.
@@ -38,6 +29,15 @@ namespace QuijoteFacturaWF.Registros {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox clienteIdTextBox;
+        
+        /// <summary>
+        /// BuscarLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton BuscarLinkButton;
         
         /// <summary>
         /// UsuarioImage control.
@@ -112,13 +112,13 @@ namespace QuijoteFacturaWF.Registros {
         protected global::System.Web.UI.WebControls.Label Label6;
         
         /// <summary>
-        /// emailTextBox control.
+        /// noCedulaTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox emailTextBox;
+        protected global::System.Web.UI.WebControls.TextBox noCedulaTextBox;
         
         /// <summary>
         /// Label7 control.

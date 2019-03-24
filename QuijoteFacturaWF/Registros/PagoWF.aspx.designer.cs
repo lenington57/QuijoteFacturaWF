@@ -13,22 +13,13 @@ namespace QuijoteFacturaWF.Registros {
     public partial class PagoWF {
         
         /// <summary>
-        /// Label3 control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
-        
-        /// <summary>
-        /// BuscarButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BuscarButton;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// pagoIdTextBox control.
@@ -38,6 +29,15 @@ namespace QuijoteFacturaWF.Registros {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox pagoIdTextBox;
+        
+        /// <summary>
+        /// BuscarLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton BuscarLinkButton;
         
         /// <summary>
         /// UsuarioImage control.

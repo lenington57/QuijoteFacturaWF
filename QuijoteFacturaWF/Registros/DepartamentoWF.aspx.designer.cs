@@ -13,22 +13,13 @@ namespace QuijoteFacturaWF.Registros {
     public partial class DepartamentoWF {
         
         /// <summary>
-        /// Label3 control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
-        
-        /// <summary>
-        /// BuscarButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BuscarButton;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// departamentoIdTextBox control.
@@ -40,13 +31,13 @@ namespace QuijoteFacturaWF.Registros {
         protected global::System.Web.UI.WebControls.TextBox departamentoIdTextBox;
         
         /// <summary>
-        /// UsuarioImage control.
+        /// BuscarLinkButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image UsuarioImage;
+        protected global::System.Web.UI.WebControls.LinkButton BuscarLinkButton;
         
         /// <summary>
         /// Label4 control.

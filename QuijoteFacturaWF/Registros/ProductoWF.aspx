@@ -10,16 +10,19 @@
                 <div class="card-header text-uppercase text-center text-primary">Producto</div>
                 <article class="card-body">
                     <form>
-                        <div class="col-md-6 col-md-offset-3">
-                            <div class="container">
-                                <div class="form-group">
-                                    <asp:Label ID="Label3" runat="server" Text="Id"></asp:Label>
-                                    <asp:Button class="btn btn-info btn-sm" ID="BuscarButton" runat="server" Text="Buscar" />
-                                    <asp:TextBox class="form-control" ID="productoIdTextBox" Text="0" type="number" runat="server"></asp:TextBox>
-                                </div>
+                        <div class="form-row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="form-group col-md-3">
+                                <asp:Label ID="Label5" runat="server" Text="Id"></asp:Label>
+                                <asp:TextBox class="form-control" ID="productoIdTextBox" Text="0" type="number" runat="server" Width="110px"></asp:TextBox>
+                            </div>
+
+                            <div class="col-lg-1 p-0">
+                                <asp:LinkButton ID="BuscarLinkButton" CssClass="btn btn-info mt-4" runat="server" OnClick="BuscarLinkButton_Click">
+                                <span class="fas fa-search"></span>Buscar
+                                </asp:LinkButton>
                             </div>
                         </div>
-                        <asp:Image ID="UsuarioImage" runat="server" Height="260px" ImageUrl="~/Resources/new-product-seal_23-2147503128.jpg" runat="server" Width="265px" AlternateText="Imagen no disponible" ImageAlign="right" />
+                        <asp:Image ID="UsuarioImage" runat="server" Height="231px" ImageUrl="~/Resources/new-product-seal_23-2147503128.jpg" runat="server" Width="222px" AlternateText="Imagen no disponible" ImageAlign="right" />
                         <div class="col-md-6 col-md-offset-3">
                             <div class="container">
                                 <div class="form-group">
@@ -45,24 +48,30 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-md-offset-3">
-                            <div class="container">
-                                <asp:Label ID="Label1" runat="server" Text="Costo"></asp:Label>
-                                <asp:TextBox class="form-control" ID="costoTextBox" runat="server" Width="160px"></asp:TextBox>
-                                <asp:Label ID="Label2" runat="server" Text="Precio"></asp:Label>
-                                <asp:TextBox class="form-control" ID="precioTextBox" runat="server" Width="160px"></asp:TextBox>
-                                <asp:Label ID="Label8" runat="server" Text="Porciento Ganado"></asp:Label>
-                                <asp:TextBox class="form-control" ID="porGanTextBox" runat="server" ReadOnly="true" Width="160px"></asp:TextBox>
-                                <asp:Label ID="Label9" runat="server" Text="Cantidad en Invetario"></asp:Label>
-                                <asp:TextBox class="form-control" ID="canInvTextBox" runat="server" ReadOnly="true" Width="160px"></asp:TextBox>
+                        <div class="form-row justify-content-center">
+                            <div class="form-group col-md-2">
+                                <asp:Label ID="Label3" runat="server" Text="Costo"></asp:Label>
+                                <asp:TextBox class="form-control" ID="costoTextBox" runat="server" Width="80px"></asp:TextBox>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <asp:Label ID="Label6" runat="server" Text="Precio"></asp:Label>
+                                <asp:TextBox class="form-control" ID="precioTextBox" runat="server" Width="80px"></asp:TextBox>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <asp:Label ID="Label11" runat="server" Text="Ganancia"></asp:Label>
+                                <asp:TextBox class="form-control" ID="porGanTextBox" runat="server" ReadOnly="true" Width="80px"></asp:TextBox>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <asp:Label ID="Label12" runat="server" Text="Cantidad"></asp:Label>
+                                <asp:TextBox class="form-control" ID="canInvTextBox" runat="server" ReadOnly="true" Width="80px"></asp:TextBox>
                             </div>
                         </div>
                         <div class="panel-footer">
                             <div class="text-center">
                                 <div class="form-group" style="display: inline-block">
-                                    <asp:Button class="btn btn-primary btn-sm" ID="nuevoButton" runat="server" Text="Nuevo" />
-                                    <asp:Button class="btn btn-success btn-sm" ID="guardarButton" runat="server" Text="Guardar" />
-                                    <asp:Button class="btn btn-danger btn-sm" ID="eliminarutton" runat="server" Text="Eliminar" />
+                                    <asp:Button class="btn btn-primary btn-sm" ID="nuevoButton" runat="server" Text="Nuevo" OnClick="nuevoButton_Click" />
+                                    <asp:Button class="btn btn-success btn-sm" ID="guardarButton" runat="server" Text="Guardar" OnClick="guardarButton_Click" />
+                                    <asp:Button class="btn btn-danger btn-sm" ID="eliminarutton" runat="server" Text="Eliminar" OnClick="eliminarutton_Click" />
                                 </div>
                             </div>
                         </div>
@@ -73,4 +82,7 @@
             <!-- card.// -->
     </div>
     <br>
+</div>
+    </div>
+    </div>
 </asp:Content>
