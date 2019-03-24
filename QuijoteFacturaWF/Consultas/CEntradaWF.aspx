@@ -13,7 +13,7 @@
                         <asp:ListItem>Todo</asp:ListItem>
                         <asp:ListItem>Todo por Fecha</asp:ListItem>
                         <asp:ListItem>Id de la Entrada</asp:ListItem>
-                        <asp:ListItem>Cantidad</asp:ListItem>
+                        <asp:ListItem>Id del Producto</asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <%--Criterio--%>
