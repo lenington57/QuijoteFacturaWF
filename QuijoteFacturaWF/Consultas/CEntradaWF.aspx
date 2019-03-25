@@ -60,7 +60,7 @@
             <div class="card-footer">
                 <div class="justify-content-start">
                     <div class="form-group" style="display: inline-block">
-                        <asp:LinkButton ID="ImprimirLinkButton" CssClass="btn btn-info mt-4" runat="server">
+                        <asp:LinkButton ID="ImprimirLinkButton" CssClass="btn btn-warning mt-4" runat="server">
                             <span class="fas fa-print"></span>
                             Imprimir
                         </asp:LinkButton>

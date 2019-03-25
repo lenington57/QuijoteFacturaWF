@@ -186,9 +186,4 @@
             <!-- card.// -->
     </div>
     <br>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
 </asp:Content>
