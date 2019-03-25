@@ -15,7 +15,7 @@ namespace QuijoteFacturaWF.Registros
         protected void Page_Load(object sender, EventArgs e)
         {
             fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
-            LlenaCombo();
+            //LlenaCombo();
         }
 
         //Métodos
@@ -38,7 +38,7 @@ namespace QuijoteFacturaWF.Registros
             producto.Descripcion = descripcionTextBox.Text;
             producto.Costo = Utils.ToInt(costoTextBox.Text);
             producto.Precio = Utils.ToInt(precioTextBox.Text);
-            producto.Ganancia = Utils.ToInt(porGanTextBox.Text);
+            producto.Ganancia = Utils.ToDouble(porGanTextBox.Text);
             producto.CantidadIventario = 0;
 
             return producto;
@@ -147,6 +147,43 @@ namespace QuijoteFacturaWF.Registros
             }
             else
                 Utils.ShowToastr(this, "No existe", "Error", "error");
+        }
+
+        //Programación de los Eventos.
+        protected void costoTextBox_TextChanged(object sender, EventArgs e)
+        {
+            double costo = Utils.ToDouble(costoTextBox.Text);
+            double precio = Utils.ToDouble(precioTextBox.Text);
+            if (costoTextBox.Text != string.Empty || precioTextBox.Text != string.Empty)
+            {
+                if (costo > precio)
+                {
+                    Utils.ShowToastr(this, "No puede ser más alto el costo que el precio", "Error", "error");
+                    return;
+                }
+                else
+                    porGanTextBox.Text = Metodos.Ganancia(costo, precio).ToString();
+            }
+            else
+                Utils.ShowToastr(this, "No puede estar vacío Costo ni Precio", "Error", "error");
+        }
+
+        protected void precioTextBox_TextChanged(object sender, EventArgs e)
+        {
+            double costo = Utils.ToDouble(costoTextBox.Text);
+            double precio = Utils.ToDouble(precioTextBox.Text);
+            if (costoTextBox.Text != string.Empty || precioTextBox.Text != string.Empty)
+            {
+                if (costo > precio)
+                {
+                    Utils.ShowToastr(this, "No puede ser más alto el costo que el precio", "Error", "error");
+                    return;
+                }
+                else
+                    porGanTextBox.Text = Metodos.Ganancia(costo, precio).ToString();
+            }
+            else
+                Utils.ShowToastr(this, "No puede estar vacío Costo ni Precio", "Error", "error");
         }
     }
 }

@@ -5,10 +5,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
 
 namespace BLL
 {
-    public class Metodos
+    public static class Metodos
     {
         public static int ToInt(string valor)
         {
@@ -303,6 +304,32 @@ namespace BLL
             list = repositorio.GetList(filtro);
 
             return list;
+        }
+
+        public static double ToDouble(string valor)
+        {
+            double retorno = 0;
+            double.TryParse(valor, out retorno);
+
+            return retorno;
+        }
+
+        //Método para obtener la Ganancia.
+        public static double Ganancia(double costo, double precio)
+        {
+            double PctGanancia = 0;
+
+            PctGanancia = precio - costo;
+            PctGanancia = PctGanancia / costo;
+            PctGanancia *= 100;
+
+            return PctGanancia;
+        }
+
+        public static void ShowToastr(this Page page, string message, string title, string type = "info")
+        {
+            page.ClientScript.RegisterStartupScript(page.GetType(), "toastr_message",
+                  String.Format("toastr.{0}('{1}', '{2}');", type.ToLower(), message, title), addScriptTags: true);
         }
     }
 }

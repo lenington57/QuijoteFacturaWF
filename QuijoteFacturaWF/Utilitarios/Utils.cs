@@ -24,6 +24,14 @@ namespace QuijoteFacturaWF.Utilitarios
             return retorno;
         }
 
+        public static double ToDouble(string valor)
+        {
+            double retorno = 0;
+            double.TryParse(valor, out retorno);
+
+            return retorno;
+        }
+
         public static decimal ToDecimal(string valor)
         {
             decimal retorno = 0;

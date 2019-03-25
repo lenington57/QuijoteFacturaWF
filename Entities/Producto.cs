@@ -23,7 +23,7 @@ namespace Entities
 
         public int Precio { get; set; }
 
-        public int Ganancia { get; set; }
+        public double Ganancia { get; set; }
 
         public int CantidadIventario { get; set; }
 

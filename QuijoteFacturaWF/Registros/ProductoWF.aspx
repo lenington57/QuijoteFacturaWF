@@ -51,11 +51,11 @@
                         <div class="form-row justify-content-center">
                             <div class="form-group col-md-2">
                                 <asp:Label ID="Label3" runat="server" Text="Costo"></asp:Label>
-                                <asp:TextBox class="form-control" ID="costoTextBox" runat="server" Width="80px"></asp:TextBox>
+                                <asp:TextBox class="form-control" ID="costoTextBox" runat="server" Width="80px" OnTextChanged="costoTextBox_TextChanged"></asp:TextBox>
                             </div>
                             <div class="form-group col-md-2">
                                 <asp:Label ID="Label6" runat="server" Text="Precio"></asp:Label>
-                                <asp:TextBox class="form-control" ID="precioTextBox" runat="server" Width="80px"></asp:TextBox>
+                                <asp:TextBox class="form-control" ID="precioTextBox" runat="server" Width="80px" OnTextChanged="precioTextBox_TextChanged"></asp:TextBox>
                             </div>
                             <div class="form-group col-md-2">
                                 <asp:Label ID="Label11" runat="server" Text="Ganancia"></asp:Label>
@@ -63,7 +63,7 @@
                             </div>
                             <div class="form-group col-md-2">
                                 <asp:Label ID="Label12" runat="server" Text="Cantidad"></asp:Label>
-                                <asp:TextBox class="form-control" ID="canInvTextBox" runat="server" ReadOnly="true" Width="80px"></asp:TextBox>
+                                <asp:TextBox class="form-control" ID="canInvTextBox" text="0" runat="server" ReadOnly="true" Width="80px"></asp:TextBox>
                             </div>
                         </div>
                         <div class="panel-footer">
@@ -82,7 +82,4 @@
             <!-- card.// -->
     </div>
     <br>
-</div>
-    </div>
-    </div>
 </asp:Content>
