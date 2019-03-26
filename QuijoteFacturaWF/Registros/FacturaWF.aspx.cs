@@ -48,7 +48,9 @@ namespace QuijoteFacturaWF.Registros
             factura.FacturaId = Utils.ToInt(facturaIdTextBox.Text);
             factura.Fecha = Convert.ToDateTime(fechaTextBox.Text).Date;
             factura.UsuarioId = Utils.ToInt(usuarioDropDownList.SelectedValue);
+            factura.NombreUsuario = usuarioDropDownList.Text;
             factura.ClienteId = Utils.ToInt(clienteDropDownList.SelectedValue);
+            factura.NombreCliente = clienteDropDownList.Text;
             factura.Itbis = Utils.ToInt(itbisTextBox.Text);
             factura.SubTotal = Utils.ToInt(subtotalTextBox.Text);
             factura.Total = Utils.ToInt(totalTextBox.Text);
@@ -195,9 +197,10 @@ namespace QuijoteFacturaWF.Registros
 
                 var dat = new DateTime(2019, 03, 15);
                 int productoId = Utils.ToIntObjetos(productoDropDownList.SelectedValue);
+                string descripcion = Metodos.Descripcion(productoId);
 
                 FacturaDetalle detalle = new FacturaDetalle();               
-                listDetalle.Add(new FacturaDetalle(0, detalle.FacturaId, productoId, cantidad, precio, importe));
+                listDetalle.Add(new FacturaDetalle(0, detalle.FacturaId, productoId, descripcion, cantidad, precio, importe));
 
                 ViewState["FacturaDetalle"] = listDetalle;
                 detalleGridView.DataSource = ViewState["FacturaDetalle"];
@@ -223,6 +226,71 @@ namespace QuijoteFacturaWF.Registros
         protected void nuevoButton_Click(object sender, EventArgs e)
         {
             LimpiaObjetos();
+        }
+
+        protected void guardarButton_Click(object sender, EventArgs e)
+        {
+            bool paso = false;
+            RepositorioFactura repositorio = new RepositorioFactura();
+            Factura factura = new Factura();
+
+            if (HayErrores())
+            {
+                return;
+            }
+            else
+            {
+                factura = LlenarClase();
+
+                if (Utils.ToInt(facturaIdTextBox.Text) == 0)
+                {
+                    paso = repositorio.Guardar(factura);
+                    Utils.ShowToastr(this, "Guardado", "Exito", "success");
+                    LimpiaObjetos();
+                }
+                else
+                {
+                    RepositorioFactura repository = new RepositorioFactura();
+                    int id = Utils.ToInt(facturaIdTextBox.Text);
+                    factura = repository.Buscar(id);
+
+                    if (factura != null)
+                    {
+                        paso = repository.Modificar(LlenarClase());
+                        Utils.ShowToastr(this, "Modificado", "Exito", "success");
+                    }
+                    else
+                        Utils.ShowToastr(this, "Id no existe", "Error", "error");
+                }
+
+                if (paso)
+                {
+                    LimpiaObjetos();
+                }
+                else
+                    Utils.ShowToastr(this, "No se pudo guardar", "Error", "error");
+            }
+        }
+
+        protected void eliminarutton_Click(object sender, EventArgs e)
+        {
+            RepositorioFactura repositorio = new RepositorioFactura();
+            int id = Utils.ToInt(facturaIdTextBox.Text);
+
+            var factura = repositorio.Buscar(id);
+
+            if (factura != null)
+            {
+                if (repositorio.Eliminar(id))
+                {
+                    Utils.ShowToastr(this, "Eliminado", "Exito", "success");
+                    LimpiaObjetos();
+                }
+                else
+                    Utils.ShowToastr(this, "No se pudo eliminar", "Error", "error");
+            }
+            else
+                Utils.ShowToastr(this, "No existe", "Error", "error");
         }
     }
 

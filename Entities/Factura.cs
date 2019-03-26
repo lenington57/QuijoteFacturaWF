@@ -15,7 +15,11 @@ namespace Entities
 
         public int UsuarioId { get; set; }
 
+        public string NombreUsuario { get; set; }
+
         public int ClienteId { get; set; }
+
+        public string NombreCliente { get; set; }
 
         public DateTime Fecha { get; set; }
 
@@ -33,9 +37,9 @@ namespace Entities
             this.Detalle = new List<FacturaDetalle>();
         }
 
-        public void AgregarDetalle(int Id, int FacturaId, int ProductoId, int Cantidad, int Precio, int Importe)
+        public void AgregarDetalle(int Id, int FacturaId, int ProductoId, string Descripcion, int Cantidad, int Precio, int Importe)
         {
-            this.Detalle.Add(new FacturaDetalle(Id, FacturaId, ProductoId, Cantidad, Precio, Importe));
+            this.Detalle.Add(new FacturaDetalle(Id, FacturaId, ProductoId, Descripcion, Cantidad, Precio, Importe));
         }
 
         public override string ToString()

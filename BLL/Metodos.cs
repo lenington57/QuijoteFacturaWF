@@ -334,6 +334,19 @@ namespace BLL
         }
 
         //Lista para el Detalle.
+        public static string Descripcion(int IdLista)
+        {
+            Repositorio<Producto> repositorio = new Repositorio<Producto>();
+            Producto producto = new Producto();
+            int id = IdLista;
+            producto = repositorio.Buscar(id);
+
+            string desc = producto.Descripcion;
+
+            return desc;
+        }
+
+        //Lista para el Detalle.
         public static List<FacturaDetalle> ListaDetalle(int IdLista)
         {
             Repositorio<FacturaDetalle> repositorio = new Repositorio<FacturaDetalle>();

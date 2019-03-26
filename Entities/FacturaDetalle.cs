@@ -18,6 +18,8 @@ namespace Entities
 
         public int ProductoId { get; set; }
 
+        public string Descripcion { get; set; }
+
         public int Cantidad { get; set; }
 
         public int Precio { get; set; }
@@ -36,16 +38,18 @@ namespace Entities
             Id = 0;
             FacturaId = 0;
             ProductoId = 0;
+            Descripcion = string.Empty;
             Cantidad = 0;
             Precio = 0;
             Importe = 0;
         }
 
-        public FacturaDetalle(int id, int facturaId, int productoId, int cantidad, int precio, int importe)
+        public FacturaDetalle(int id, int facturaId, int productoId, string descripcion, int cantidad, int precio, int importe)
         {
             Id = id;
             FacturaId = facturaId;
             ProductoId = productoId;
+            Descripcion = descripcion;
             Cantidad = cantidad;
             Precio = precio;
             Importe = importe;

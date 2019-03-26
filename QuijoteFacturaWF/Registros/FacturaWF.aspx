@@ -38,7 +38,7 @@
                                  <asp:Label ID="Label3" runat="server" Text="User"></asp:Label>
                              </div>
                             <div class="col-lg-1 p-0">
-                                <asp:DropDownList class="form-control" ID="usuarioDropDownList" Width="170px" runat="server"></asp:DropDownList>
+                                <asp:DropDownList class="form-control" ID="usuarioDropDownList" Width="170px" runat="server" Enabled="False"></asp:DropDownList>
                                 <%--<asp:TextBox class="form-control" ID="usuarioTextBox1" Placeholder="Usuario" runat="server" ReadOnly="true" Width="170px"></asp:TextBox>--%>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                                                                 <asp:Button ID="eliminarButton" class="btn btn-danger btn-sm" runat="server" CausesValidation="False" CommandName="Delete" Text="Remover" OnClick="removerLinkButton_Click"></asp:Button>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:BoundField DataField="ProductoId" HeaderText="ProductoId" />
+                                                        <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
                                                         <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
                                                         <asp:BoundField DataField="Precio" HeaderText="Precio" />
                                                         <asp:BoundField DataField="Importe" HeaderText="Importe" />
@@ -155,8 +155,8 @@
                             <div class="text-center">
                                 <div class="form-group" style="display: inline-block">
                                     <asp:Button class="btn btn-primary" ID="nuevoButton" runat="server" Text="Nuevo" OnClick="nuevoButton_Click" />
-                                    <asp:Button class="btn btn-success" ID="guardarButton" runat="server" Text="Guardar" />
-                                    <asp:Button class="btn btn-danger" ID="eliminarutton" runat="server" Text="Eliminar" />
+                                    <asp:Button class="btn btn-success" ID="guardarButton" runat="server" Text="Guardar" OnClick="guardarButton_Click" />
+                                    <asp:Button class="btn btn-danger" ID="eliminarutton" runat="server" Text="Eliminar" OnClick="eliminarutton_Click" />
                                 </div>
                             </div>
                         </div>
@@ -186,4 +186,8 @@
             <!-- card.// -->
     </div>
     <br>
+</div>
+    </div>
+</div>
+    </div>
 </asp:Content>
