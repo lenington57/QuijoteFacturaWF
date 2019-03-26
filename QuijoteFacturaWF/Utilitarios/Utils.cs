@@ -16,7 +16,7 @@ namespace QuijoteFacturaWF.Utilitarios
             return retorno;
         }
 
-        private static int ToIntObjetos(object valor)
+        public static int ToIntObjetos(object valor)
         {
             int retorno = 0;
             int.TryParse(valor.ToString(), out retorno);
@@ -30,6 +30,14 @@ namespace QuijoteFacturaWF.Utilitarios
             double.TryParse(valor, out retorno);
 
             return retorno;
+        }
+
+        public static double ToDoubleObjetos(object valor)
+        {
+            double retorno = 0;
+            double.TryParse(valor.ToString(), out retorno);
+
+            return Convert.ToDouble(retorno);
         }
 
         public static decimal ToDecimal(string valor)

@@ -43,7 +43,7 @@
                             <div class="container">
                                 <div class="form-group">
                                     <asp:Label ID="Label5" runat="server" Text="Numero de Telefono"></asp:Label>
-                                    <asp:TextBox class="form-control" ID="noTelefonoTextBox" placeholder="000-000-0000" runat="server"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="noTelefonoTextBox" placeholder="000-000-0000" runat="server" MaxLength="10"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -87,5 +87,6 @@
             <!-- card.// -->
     </div>
     <br>
+    </div>
     </div>
 </asp:Content>

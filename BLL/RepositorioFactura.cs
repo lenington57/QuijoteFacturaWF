@@ -201,12 +201,5 @@ namespace BLL
             return list;
         }
 
-        public static double Importe(double cantidad, double precio)
-        {
-            double CalImporte = 0;
-            CalImporte = cantidad * precio;
-
-            return CalImporte;
-        }
     }
 }

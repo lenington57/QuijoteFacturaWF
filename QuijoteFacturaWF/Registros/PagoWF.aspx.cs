@@ -56,10 +56,21 @@ namespace QuijoteFacturaWF.Registros
             montoTextBox.Text = pago.Monto.ToString();
         }
 
+        private bool HayErrores()
+        {
+            bool HayErrores = false;
+            if (Utils.ToIntObjetos(clienteDropDownList.SelectedValue) < 1)
+            {
+                Utils.ShowToastr(this, "Debe tener al menos un Cliente guardado", "Error", "error");
+                HayErrores = true;
+            }
+            return HayErrores;
+        }
+
         //Programación de los Botones
         protected void BuscarLinkButton_Click(object sender, EventArgs e)
         {
-            Repositorio<Pago> repositorio = new Repositorio<Pago>();
+            RepositorioPago repositorio = new RepositorioPago();
 
             var pago = repositorio.Buscar(Utils.ToInt(pagoIdTextBox.Text));
             if (pago != null)
@@ -82,30 +93,37 @@ namespace QuijoteFacturaWF.Registros
         protected void guardarButton_Click(object sender, EventArgs e)
         {
             bool paso = false;
-            Repositorio<Pago> repositorio = new Repositorio<Pago>();
+            RepositorioPago repositorio = new RepositorioPago();
             Pago pago = new Pago();
 
-            pago = LlenaClase();
-
-            if (pagoIdTextBox.Text == "0")
+            if (HayErrores())
             {
-                paso = repositorio.Guardar(pago);
-                Utils.ShowToastr(this, "Guardado", "Exito", "success");
-                LimpiaObjetos();
+                return;
             }
             else
             {
-                Repositorio<Pago> repository = new Repositorio<Pago>();
-                int id = Utils.ToInt(pagoIdTextBox.Text);
-                pago = repository.Buscar(id);
+                pago = LlenaClase();
 
-                if (pago != null)
+                if (pagoIdTextBox.Text == "0")
                 {
-                    paso = repository.Modificar(LlenaClase());
-                    Utils.ShowToastr(this, "Modificado", "Exito", "success");
+                    paso = repositorio.Guardar(pago);
+                    Utils.ShowToastr(this, "Guardado", "Exito", "success");
+                    LimpiaObjetos();
                 }
                 else
-                    Utils.ShowToastr(this, "Id no existe", "Error", "error");
+                {
+                    RepositorioPago repository = new RepositorioPago();
+                    int id = Utils.ToInt(pagoIdTextBox.Text);
+                    pago = repository.Buscar(id);
+
+                    if (pago != null)
+                    {
+                        paso = repository.Modificar(LlenaClase());
+                        Utils.ShowToastr(this, "Modificado", "Exito", "success");
+                    }
+                    else
+                        Utils.ShowToastr(this, "Id no existe", "Error", "error");
+                }
             }
 
             if (paso)
@@ -118,7 +136,7 @@ namespace QuijoteFacturaWF.Registros
 
         protected void eliminarutton_Click(object sender, EventArgs e)
         {
-            Repositorio<Pago> repositorio = new Repositorio<Pago>();
+            RepositorioPago repositorio = new RepositorioPago();
             int id = Utils.ToInt(pagoIdTextBox.Text);
 
             var pago = repositorio.Buscar(id);

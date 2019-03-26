@@ -326,10 +326,31 @@ namespace BLL
             return PctGanancia;
         }
 
+        //Toastr.
         public static void ShowToastr(this Page page, string message, string title, string type = "info")
         {
             page.ClientScript.RegisterStartupScript(page.GetType(), "toastr_message",
                   String.Format("toastr.{0}('{1}', '{2}');", type.ToLower(), message, title), addScriptTags: true);
+        }
+
+        //Lista para el Detalle.
+        public static List<FacturaDetalle> ListaDetalle(int IdLista)
+        {
+            Repositorio<FacturaDetalle> repositorio = new Repositorio<FacturaDetalle>();
+            List<FacturaDetalle> list = new List<FacturaDetalle>();
+            int id = IdLista;
+            list = repositorio.GetList(c => c.FacturaId == id);
+
+            return list;
+        }
+
+        //Lista para el Importe del Detalle.
+        public static int Importe(int cantidad, int precio)
+        {
+            int CalImporte = 0;
+            CalImporte = cantidad * precio;
+
+            return CalImporte;
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BLL;
+using Entities;
+using QuijoteFacturaWF.Utilitarios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,14 +15,214 @@ namespace QuijoteFacturaWF.Registros
         protected void Page_Load(object sender, EventArgs e)
         {
             fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            LlenaCombo();
+            ViewState["FacturaDetalle"] = new FacturaDetalle();
         }
         //Métodos
-        //Programación de los Botones
+        private void LlenaCombo()
+        {
+            Repositorio<Usuario> repositoriu = new Repositorio<Usuario>();
+            Repositorio<Cliente> repositorio = new Repositorio<Cliente>();
+            Repositorio<Producto> repository = new Repositorio<Producto>();
+
+            usuarioDropDownList.DataSource = repositoriu.GetList(t => true);
+            usuarioDropDownList.DataValueField = "UsuarioId";
+            usuarioDropDownList.DataTextField = "Nombres";
+            usuarioDropDownList.DataBind();
+
+            clienteDropDownList.DataSource = repositorio.GetList(t => true);
+            clienteDropDownList.DataValueField = "ClienteId";
+            clienteDropDownList.DataTextField = "Nombres";
+            clienteDropDownList.DataBind();
+
+            productoDropDownList.DataSource = repository.GetList(t => true);
+            productoDropDownList.DataValueField = "ProductoId";
+            productoDropDownList.DataTextField = "Descripcion";
+            productoDropDownList.DataBind();
+        }
+
+        public Factura LlenarClase()
+        {
+            Factura factura = new Factura();
+
+            factura.FacturaId = Utils.ToInt(facturaIdTextBox.Text);
+            factura.Fecha = Convert.ToDateTime(fechaTextBox.Text).Date;
+            factura.UsuarioId = Utils.ToInt(usuarioDropDownList.SelectedValue);
+            factura.ClienteId = Utils.ToInt(clienteDropDownList.SelectedValue);
+            factura.Itbis = Utils.ToInt(itbisTextBox.Text);
+            factura.SubTotal = Utils.ToInt(subtotalTextBox.Text);
+            factura.Total = Utils.ToInt(totalTextBox.Text);
+            factura.Detalle = (List<FacturaDetalle>)ViewState["FacturaDetalle"];
+
+            return factura;
+        }
+
+        public void LlenarCampos(Factura factura)
+        {
+            fechaTextBox.Text = factura.Fecha.ToString("yyyy-MM-dd");
+            usuarioDropDownList.SelectedValue = factura.UsuarioId.ToString();
+            clienteDropDownList.SelectedValue = factura.ClienteId.ToString();
+            detalleGridView.DataSource = Metodos.ListaDetalle(Utils.ToInt(facturaIdTextBox.Text));
+            detalleGridView.DataBind();
+            itbisTextBox.Text = factura.Itbis.ToString();
+            subtotalTextBox.Text = factura.SubTotal.ToString();
+            totalTextBox.Text = factura.Total.ToString();
+        }
+
+        protected void LimpiaObjetos()
+        {
+            facturaIdTextBox.Text = "0";
+            fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            usuarioDropDownList.SelectedIndex = 0;
+            clienteDropDownList.SelectedIndex = 0;
+            itbisTextBox.Text = "";
+            subtotalTextBox.Text = "";
+            totalTextBox.Text = "";
+            detalleGridView.DataSource = null;
+            detalleGridView.DataBind();
+        }
+
+        private bool HayErrores()
+        {
+            bool HayErrores = false;
+
+            if (detalleGridView.Rows.Count == 0)
+            {
+                Utils.ShowToastr(this, "Debe agregar.", "Error", "error");
+                HayErrores = true;
+            }
+            if (Utils.ToIntObjetos(clienteDropDownList.SelectedValue) < 1)
+            {
+                Utils.ShowToastr(this, "Todavía no hay un Cliente guardado.", "Error", "error");
+                HayErrores = true;
+            }
+            if (Utils.ToIntObjetos(productoDropDownList.SelectedValue) < 1)
+            {
+                Utils.ShowToastr(this, "Todavía no hay un Producto guardado.", "Error", "error");
+                HayErrores = true;
+            }
+            return HayErrores;
+        }
+
+        private void LlenaPrecio()
+        {
+            int id = Utils.ToInt(productoDropDownList.SelectedValue);
+            Repositorio<Producto> repositorio = new Repositorio<Producto>();
+            List<Producto> ListProductos = repositorio.GetList(c => c.ProductoId == id);
+            foreach (var item in ListProductos)
+            {
+                precioTextBox.Text = item.Precio.ToString();
+            }
+        }
+
+        private void LlenaImporte()
+        {
+            int cantidad, precio;
+
+            cantidad = Utils.ToInt(cantidadTextBox.Text);
+            precio = Utils.ToInt(precioTextBox.Text);
+            importeTextBox.Text = Metodos.Importe(cantidad, precio).ToString();
+        }
+
+        private void LlenaValores()
+        {
+            List<FacturaDetalle> detalle = new List<FacturaDetalle>();
+
+            if (detalleGridView.DataSource != null)
+            {
+                detalle = (List<FacturaDetalle>)detalleGridView.DataSource;
+            }
+            int Total = 0;
+            double Itbis = 0;
+            double SubTotal = 0;
+            foreach (var item in detalle)
+            {
+                Total += item.Importe;
+            }
+            Itbis = Total * 0.18f;
+            SubTotal = Total - Itbis;
+            subtotalTextBox.Text = SubTotal.ToString();
+            itbisTextBox.Text = Itbis.ToString();
+            totalTextBox.Text = Total.ToString();
+        }
+
+        private void RebajaValores()
+        {
+            List<FacturaDetalle> detalle = new List<FacturaDetalle>();
+
+            if (detalleGridView.DataSource != null)
+            {
+                detalle = (List<FacturaDetalle>)detalleGridView.DataSource;
+            }
+            int Total = 0;
+            double Itbis = 0;
+            double SubTotal = 0;
+            foreach (var item in detalle)
+            {
+                Total -= item.Importe;
+            }
+            Total *= (-1);
+            Itbis = Total * 0.18f;
+            SubTotal = Total - Itbis;
+            subtotalTextBox.Text = SubTotal.ToString();
+            itbisTextBox.Text = Itbis.ToString();
+            totalTextBox.Text = Total.ToString();
+        }
+
 
         //Eventos de los Objetos
         protected void productoIdTextBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+
+        //Programación de los Botones
+        protected void agregarLinkButton_Click(object sender, EventArgs e)
+        {
+            List<FacturaDetalle> listDetalle = new List<FacturaDetalle>();
+
+            if (detalleGridView.DataSource != null)
+            {
+                listDetalle = (List<FacturaDetalle>)detalleGridView.DataSource;
+            }
+            else
+            {
+                DateTime date = DateTime.Now.Date;
+                int cantidad = Utils.ToInt(cantidadTextBox.Text);
+                int precio = Utils.ToInt(precioTextBox.Text);
+                int importe = Utils.ToInt(importeTextBox.Text);
+
+                var dat = new DateTime(2019, 03, 15);
+                int productoId = Utils.ToIntObjetos(productoDropDownList.SelectedValue);
+
+                FacturaDetalle detalle = new FacturaDetalle();               
+                listDetalle.Add(new FacturaDetalle(0, detalle.FacturaId, productoId, cantidad, precio, importe));
+
+                ViewState["FacturaDetalle"] = listDetalle;
+                detalleGridView.DataSource = ViewState["FacturaDetalle"];
+                detalleGridView.DataBind();
+
+                LlenaValores();
+            }
+        }
+
+        protected void removerLinkButton_Click(object sender, EventArgs e)
+        {
+            RebajaValores();
+            detalleGridView.DataSource = null;
+            detalleGridView.DataBind();
+        }
+
+        protected void cantidadTextBox_TextChanged(object sender, EventArgs e)
+        {
+            LlenaPrecio();
+            LlenaImporte();
+        }
+
+        protected void nuevoButton_Click(object sender, EventArgs e)
+        {
+            LimpiaObjetos();
         }
     }
 

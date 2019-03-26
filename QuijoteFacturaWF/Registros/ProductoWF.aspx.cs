@@ -15,7 +15,7 @@ namespace QuijoteFacturaWF.Registros
         protected void Page_Load(object sender, EventArgs e)
         {
             fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
-            //LlenaCombo();
+            LlenaCombo();
         }
 
         //Métodos

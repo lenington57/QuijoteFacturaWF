@@ -19,9 +19,9 @@ namespace Entities
 
         public DateTime Fecha { get; set; }
 
-        public int SubTotal { get; set; }
+        public double SubTotal { get; set; }
 
-        public int Itbis { get; set; }
+        public double Itbis { get; set; }
 
         public int Total { get; set; }
 

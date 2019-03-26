@@ -42,7 +42,7 @@
                             <div class="container">
                                 <div class="form-group">
                                     <asp:Label ID="Label5" runat="server" Text="Número de Teléfono"></asp:Label>
-                                    <asp:TextBox class="form-control" ID="noTelefonoTextBox" placeholder="000-000-0000" runat="server"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="noTelefonoTextBox" placeholder="000-000-0000" runat="server" MaxLength="10"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                             <div class="container">
                                 <div class="form-group">
                                     <asp:Label ID="Label6" runat="server" Text="Número de Cédula"></asp:Label>
-                                    <asp:TextBox class="form-control" ID="noCedulaTextBox" placeholder="000-0000000-0" runat="server"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="noCedulaTextBox" placeholder="000-0000000-0" runat="server" MaxLength="11"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                             <div class="container">
                                 <div class="form-group">
                                     <asp:Label ID="Label7" runat="server" Text="Direccion"></asp:Label>
-                                    <asp:TextBox class="form-control" ID="direccionTextBox" type="password" runat="server"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="direccionTextBox" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -86,5 +86,6 @@
             <!-- card.// -->
     </div>
     <br>
+    </div>
     </div>
 </asp:Content>

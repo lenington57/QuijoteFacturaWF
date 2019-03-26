@@ -15,7 +15,7 @@ namespace QuijoteFacturaWF.Registros
         protected void Page_Load(object sender, EventArgs e)
         {
             fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
-            //LlenaCombo();
+            LlenaCombo();
         }
 
         //Métodos
@@ -56,10 +56,21 @@ namespace QuijoteFacturaWF.Registros
             cantidadTextBox.Text = entrada.Cantidad.ToString();
         }
 
+        private bool HayErrores()
+        {
+            bool HayErrores = false;
+            if (Utils.ToIntObjetos(productoDropDownList.SelectedValue) < 1)
+            {
+                Utils.ShowToastr(this, "Debe tener al menos un Producto guardado", "Error", "error");
+                HayErrores = true;
+            }
+            return HayErrores;
+        }
+
         //Programación de los Botones
         protected void BuscarLinkButton_Click(object sender, EventArgs e)
         {
-            Repositorio<Entrada> repositorio = new Repositorio<Entrada>();
+            RepositorioEntrada repositorio = new RepositorioEntrada();
 
             var entrada = repositorio.Buscar(Utils.ToInt(entradaIdTextBox.Text));
             if (entrada != null)
@@ -82,43 +93,50 @@ namespace QuijoteFacturaWF.Registros
         protected void guardarButton_Click(object sender, EventArgs e)
         {
             bool paso = false;
-            Repositorio<Entrada> repositorio = new Repositorio<Entrada>();
+            RepositorioEntrada repositorio = new RepositorioEntrada();
             Entrada entrada = new Entrada();
 
-            entrada = LlenaClase();
-
-            if (entradaIdTextBox.Text == "0")
+            if (HayErrores())
             {
-                paso = repositorio.Guardar(entrada);
-                Utils.ShowToastr(this, "Guardado", "Exito", "success");
-                LimpiaObjetos();
+                return;
             }
             else
             {
-                Repositorio<Entrada> repository = new Repositorio<Entrada>();
-                int id = Utils.ToInt(entradaIdTextBox.Text);
-                entrada = repository.Buscar(id);
+                entrada = LlenaClase();
 
-                if (entrada != null)
+                if (entradaIdTextBox.Text == "0")
                 {
-                    paso = repository.Modificar(LlenaClase());
-                    Utils.ShowToastr(this, "Modificado", "Exito", "success");
+                    paso = repositorio.Guardar(entrada);
+                    Utils.ShowToastr(this, "Guardado", "Exito", "success");
+                    LimpiaObjetos();
                 }
                 else
-                    Utils.ShowToastr(this, "Id no existe", "Error", "error");
-            }
+                {
+                    RepositorioEntrada repository = new RepositorioEntrada();
+                    int id = Utils.ToInt(entradaIdTextBox.Text);
+                    entrada = repository.Buscar(id);
 
-            if (paso)
-            {
-                LimpiaObjetos();
+                    if (entrada != null)
+                    {
+                        paso = repository.Modificar(LlenaClase());
+                        Utils.ShowToastr(this, "Modificado", "Exito", "success");
+                    }
+                    else
+                        Utils.ShowToastr(this, "Id no existe", "Error", "error");
+                }
+
+                if (paso)
+                {
+                    LimpiaObjetos();
+                }
+                else
+                    Utils.ShowToastr(this, "No se pudo guardar", "Error", "error");
             }
-            else
-                Utils.ShowToastr(this, "No se pudo guardar", "Error", "error");
         }
 
         protected void eliminarutton_Click(object sender, EventArgs e)
         {
-            Repositorio<Entrada> repositorio = new Repositorio<Entrada>();
+            RepositorioEntrada repositorio = new RepositorioEntrada();
             int id = Utils.ToInt(entradaIdTextBox.Text);
 
             var entrada = repositorio.Buscar(id);

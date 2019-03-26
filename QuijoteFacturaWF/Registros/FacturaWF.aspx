@@ -38,7 +38,8 @@
                                  <asp:Label ID="Label3" runat="server" Text="User"></asp:Label>
                              </div>
                             <div class="col-lg-1 p-0">
-                                <asp:TextBox class="form-control" ID="usuarioTextBox1" Placeholder="Usuario" runat="server" ReadOnly="true" Width="170px"></asp:TextBox>
+                                <asp:DropDownList class="form-control" ID="usuarioDropDownList" Width="170px" runat="server"></asp:DropDownList>
+                                <%--<asp:TextBox class="form-control" ID="usuarioTextBox1" Placeholder="Usuario" runat="server" ReadOnly="true" Width="170px"></asp:TextBox>--%>
                             </div>
                         </div>
                         <asp:Image ID="FacturaImage" runat="server" Height="208px" ImageUrl="~/Resources/mejores-herramientas-factuacion-electronica-810x607.jpg" runat="server" Width="167px" AlternateText="Imagen no disponible" ImageAlign="right" />
@@ -70,7 +71,7 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class="form-group col-md-2">
                                 <asp:Label ID="Label1" runat="server" Text="Cantidad"></asp:Label>
-                                <asp:TextBox class="form-control" ID="cantidadTextBox" runat="server" Width="80px"></asp:TextBox>
+                                <asp:TextBox class="form-control" ID="cantidadTextBox" runat="server" Width="80px" OnTextChanged="cantidadTextBox_TextChanged"></asp:TextBox>
                             </div>
                             &nbsp;&nbsp;
                             <div class="form-group col-md-2">
@@ -85,17 +86,11 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                             <div class="col-lg-1 p-0">
-                                <asp:LinkButton ID="agregarLinkButton" CssClass="btn btn-dark mt-4" runat="server">
+                                <asp:LinkButton ID="agregarLinkButton" CssClass="btn btn-dark mt-4" runat="server" OnClick="agregarLinkButton_Click">
                                 <span class="fas fa-search"></span>Agregar
                                 </asp:LinkButton>
                             </div>
                             &nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <div class="col-lg-1 p-0">
-                                <asp:LinkButton ID="removerLinkButton" CssClass="btn btn-danger mt-4" runat="server">
-                                <span class="fas fa-search"></span>Remover
-                                </asp:LinkButton>
-                            </div>
                         </div>
                         <div class="col-md-12 col-md-offset-3">
                             <div class="container">
@@ -104,9 +99,14 @@
                                         <div class="card-body">
                                             <asp:Label ID="criterioLabel" runat="server" Text="Detalle" Font-Bold="True" ValidateRequestMode="Inherit" Font-Size="Large"></asp:Label>
                                             <div class="form-row justify-content-center">
-                                                <asp:GridView ID="prestamoGridView" runat="server" class="table table-condensed table-bordered table-responsive" AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" GridLines="None" BackColor="White">
+                                                <asp:GridView ID="detalleGridView" runat="server" class="table table-condensed table-bordered table-responsive" AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" GridLines="None" BackColor="White">
                                                     <AlternatingRowStyle BackColor="#999999" />
                                                     <Columns>
+                                                        <asp:TemplateField ShowHeader="False">
+                                                            <ItemTemplate>
+                                                                <asp:Button ID="eliminarButton" class="btn btn-danger btn-sm" runat="server" CausesValidation="False" CommandName="Delete" Text="Remover" OnClick="removerLinkButton_Click"></asp:Button>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
                                                         <asp:BoundField DataField="ProductoId" HeaderText="ProductoId" />
                                                         <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
                                                         <asp:BoundField DataField="Precio" HeaderText="Precio" />
@@ -154,7 +154,7 @@
                         <div class="panel-footer">
                             <div class="text-center">
                                 <div class="form-group" style="display: inline-block">
-                                    <asp:Button class="btn btn-primary" ID="nuevoButton" runat="server" Text="Nuevo" />
+                                    <asp:Button class="btn btn-primary" ID="nuevoButton" runat="server" Text="Nuevo" OnClick="nuevoButton_Click" />
                                     <asp:Button class="btn btn-success" ID="guardarButton" runat="server" Text="Guardar" />
                                     <asp:Button class="btn btn-danger" ID="eliminarutton" runat="server" Text="Eliminar" />
                                 </div>
