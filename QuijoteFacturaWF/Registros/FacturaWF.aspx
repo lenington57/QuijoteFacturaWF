@@ -25,7 +25,7 @@
                                 <asp:TextBox class="form-control" ID="facturaIdTextBox" type="number" Text="0" runat="server" Width="100px"></asp:TextBox>
                             </div>
                             <div class="col-lg-1 p-0">
-                                <asp:LinkButton ID="BuscarLinkButton" CssClass="btn btn-info mt-4" runat="server">
+                                <asp:LinkButton ID="BuscarLinkButton" CssClass="btn btn-info mt-4" runat="server" OnClick="BuscarLinkButton_Click">
                                 <span class="fas fa-search"></span>Buscar
                                 </asp:LinkButton>
                             </div>
@@ -71,17 +71,17 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class="form-group col-md-2">
                                 <asp:Label ID="Label1" runat="server" Text="Cantidad"></asp:Label>
-                                <asp:TextBox class="form-control" ID="cantidadTextBox" runat="server" Width="80px" OnTextChanged="cantidadTextBox_TextChanged"></asp:TextBox>
+                                <asp:TextBox class="form-control" ID="cantidadTextBox" runat="server" AutoPostBack="true" Width="80px" OnTextChanged="cantidadTextBox_TextChanged"></asp:TextBox>
                             </div>
                             &nbsp;&nbsp;
                             <div class="form-group col-md-2">
                                 <asp:Label ID="Label2" runat="server" Text="Precio"></asp:Label>
-                                <asp:TextBox class="form-control" ID="precioTextBox" runat="server" ReadOnly="true" Width="100px"></asp:TextBox>
+                                <asp:TextBox class="form-control" ID="precioTextBox" runat="server" AutoPostBack="true" ReadOnly="true" Width="100px"></asp:TextBox>
                             </div>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class="form-group col-md-2">
                                 <asp:Label ID="Label8" runat="server" Text="Importe"></asp:Label>
-                                <asp:TextBox class="form-control" ID="importeTextBox" runat="server" ReadOnly="true" Width="100px"></asp:TextBox>
+                                <asp:TextBox class="form-control" ID="importeTextBox" runat="server" AutoPostBack="true" ReadOnly="true" Width="100px"></asp:TextBox>
                             </div>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
