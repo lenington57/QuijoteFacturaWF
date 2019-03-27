@@ -1,5 +1,6 @@
 ﻿using BLL;
 using Entities;
+using Microsoft.Reporting.WebForms;
 using QuijoteFacturaWF.Utilitarios;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace QuijoteFacturaWF.Registros
                 fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 LlenaCombo();
                 ViewState["FacturaDetalle"] = new FacturaDetalle();
+
+                LlenaReport();
             }
         }
         //Métodos
@@ -42,6 +45,17 @@ namespace QuijoteFacturaWF.Registros
             productoDropDownList.DataValueField = "ProductoId";
             productoDropDownList.DataTextField = "Descripcion";
             productoDropDownList.DataBind();
+        }
+
+        public void LlenaReport()
+        {
+            int id = Utils.ToInt(facturaIdTextBox.Text);
+            MyFacturasReportViewer.ProcessingMode = ProcessingMode.Local;
+            MyFacturasReportViewer.Reset();
+            MyFacturasReportViewer.LocalReport.ReportPath = Server.MapPath(@"~\Reportes\FacturaRecibo.rdlc");
+            MyFacturasReportViewer.LocalReport.DataSources.Clear();
+            MyFacturasReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DetalleDS", BLL.Metodos.FilFacturas(id)));
+            MyFacturasReportViewer.LocalReport.Refresh();
         }
 
         public Factura LlenarClase()
@@ -81,6 +95,9 @@ namespace QuijoteFacturaWF.Registros
             fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
             usuarioDropDownList.SelectedIndex = 0;
             clienteDropDownList.SelectedIndex = 0;
+            cantidadTextBox.Text = "";
+            precioTextBox.Text = "";
+            importeTextBox.Text = "";
             itbisTextBox.Text = "";
             subtotalTextBox.Text = "";
             totalTextBox.Text = "";
@@ -152,6 +169,19 @@ namespace QuijoteFacturaWF.Registros
             totalTextBox.Text = Total.ToString();
         }
 
+        private void Valores(int importe)
+        {
+            int Total = importe;
+            double Itbis = 0;
+            double SubTotal = 0;
+
+            Itbis = Total * 0.18f;
+            SubTotal = Total - Itbis;
+            subtotalTextBox.Text = SubTotal.ToString();
+            itbisTextBox.Text = Itbis.ToString();
+            totalTextBox.Text = Total.ToString();
+        }
+
         private void RebajaValores()
         {
             List<FacturaDetalle> detalle = new List<FacturaDetalle>();
@@ -205,14 +235,14 @@ namespace QuijoteFacturaWF.Registros
                     int productoId = Utils.ToIntObjetos(productoDropDownList.SelectedValue);
                     string descripcion = Metodos.Descripcion(productoId);
 
+                    Valores(importe);
+                    totalTextBox.Text = importe.ToString();
                     FacturaDetalle detalle = new FacturaDetalle();
                     listDetalle.Add(new FacturaDetalle(0, detalle.FacturaId, productoId, descripcion, cantidad, precio, importe));
 
                     ViewState["FacturaDetalle"] = listDetalle;
                     detalleGridView.DataSource = listDetalle;
                     detalleGridView.DataBind();
-
-                    LlenaValores();
                 }
             }
         }

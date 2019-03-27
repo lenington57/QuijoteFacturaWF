@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Microsoft.Reporting.WebForms;
 using QuijoteFacturaWF.Utilitarios;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,19 @@ namespace QuijoteFacturaWF.Consultas
             {
                 DesdeTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 HastaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                LlenaReport();
             }
+            
+        }
+
+        public void LlenaReport()
+        {
+            MyClientesReportViewer.ProcessingMode = ProcessingMode.Local;
+            MyClientesReportViewer.Reset();
+            MyClientesReportViewer.LocalReport.ReportPath = Server.MapPath(@"~\Reportes\ListadoClientes.rdlc");
+            MyClientesReportViewer.LocalReport.DataSources.Clear();
+            MyClientesReportViewer.LocalReport.DataSources.Add(new ReportDataSource("ClienteDS", BLL.Metodos.FClientes()));
+            MyClientesReportViewer.LocalReport.Refresh();
         }
         private int ToInt(object valor)
         {

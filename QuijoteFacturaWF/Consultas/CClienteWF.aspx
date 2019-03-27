@@ -3,6 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
     <div class="card card-register mx-auto mt-5">
         <div class="card-header text-uppercase text-center">Consultar Clientes</div>
         <div class="card-body">
@@ -60,14 +63,32 @@
                     </div>
                 </div>
             </div>
-            <%--Botones--%>
+            <%--Imprimir--%>
             <div class="card-footer">
                 <div class="justify-content-start">
                     <div class="form-group" style="display: inline-block">
-                        <asp:LinkButton ID="ImprimirLinkButton" CssClass="btn btn-warning mt-4" runat="server">
-                            <span class="fas fa-print"></span>
-                            Imprimir
-                        </asp:LinkButton>
+                        <button type="button" class="btn btn-warning mt-4" data-toggle="modal" data-target=".bd-example-modal-lg">Imprimir</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal para mi Reporte.// -->
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm" style="max-width: 600px!important; min-width: 300px!important">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Vista Rápida de Facturas</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <%--Viewer--%>
+                            <rsweb:ReportViewer ID="MyClientesReportViewer" runat="server" ProcessingMode="Remote" Height="400px" Width="500px">
+                                <ServerReport ReportPath="" ReportServerUrl="" />
+                            </rsweb:ReportViewer>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
                     </div>
                 </div>
             </div>

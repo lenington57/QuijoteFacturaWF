@@ -13,6 +13,15 @@ namespace QuijoteFacturaWF.Consultas {
     public partial class CClienteWF {
         
         /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
         /// FiltroDropDownList control.
         /// </summary>
         /// <remarks>
@@ -85,12 +94,12 @@ namespace QuijoteFacturaWF.Consultas {
         protected global::System.Web.UI.WebControls.GridView ClienteGridView;
         
         /// <summary>
-        /// ImprimirLinkButton control.
+        /// MyClientesReportViewer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ImprimirLinkButton;
+        protected global::Microsoft.Reporting.WebForms.ReportViewer MyClientesReportViewer;
     }
 }

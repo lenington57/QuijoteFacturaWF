@@ -64,6 +64,17 @@ namespace BLL
             return list;
         }
 
+        public static List<FacturaDetalle> FilFacturas(int id)
+        {
+            Expression<Func<FacturaDetalle, bool>> filtro = p => true;
+            Repositorio<FacturaDetalle> repositorio = new Repositorio<FacturaDetalle>();
+            List<FacturaDetalle> list = new List<FacturaDetalle>();
+
+            list = repositorio.GetList(p=> p.FacturaId == id);
+
+            return list;
+        }
+
         public static List<Pago> FPagos()
         {
             Expression<Func<Pago, bool>> filtro = p => true;

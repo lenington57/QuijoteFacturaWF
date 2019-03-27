@@ -3,6 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
+
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div class="form-row justify-content-center">
         <aside class="col-sm-8">
             <div class="card">
@@ -67,89 +70,94 @@
                         <br>
                         <br>
                         <br>
-                        <div class="form-row">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:UpdatePanel ID="detalleUP" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="form-row">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class="form-group col-md-2">
                                 <asp:Label ID="Label1" runat="server" Text="Cantidad"></asp:Label>
-                                <asp:TextBox class="form-control" ID="cantidadTextBox" runat="server" AutoPostBack="true" Width="80px" OnTextChanged="cantidadTextBox_TextChanged"></asp:TextBox>
+                                <asp:TextBox class="form-control" ID="cantidadTextBox" type="number" runat="server" AutoPostBack="true" Width="80px" OnTextChanged="cantidadTextBox_TextChanged"></asp:TextBox>
                             </div>
-                            &nbsp;&nbsp;
+                                    &nbsp;&nbsp;
                             <div class="form-group col-md-2">
                                 <asp:Label ID="Label2" runat="server" Text="Precio"></asp:Label>
                                 <asp:TextBox class="form-control" ID="precioTextBox" runat="server" AutoPostBack="true" ReadOnly="true" Width="100px"></asp:TextBox>
                             </div>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class="form-group col-md-2">
                                 <asp:Label ID="Label8" runat="server" Text="Importe"></asp:Label>
                                 <asp:TextBox class="form-control" ID="importeTextBox" runat="server" AutoPostBack="true" ReadOnly="true" Width="100px"></asp:TextBox>
                             </div>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                            <div class="col-lg-1 p-0">
-                                <asp:LinkButton ID="agregarLinkButton" CssClass="btn btn-dark mt-4" runat="server" OnClick="agregarLinkButton_Click">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="col-lg-1 p-0">
+                            <asp:LinkButton ID="agregarLinkButton" CssClass="btn btn-dark mt-4" runat="server" OnClick="agregarLinkButton_Click">
                                 <span class="fas fa-search"></span>Agregar
-                                </asp:LinkButton>
-                            </div>
-                            &nbsp;&nbsp;
+                            </asp:LinkButton>
                         </div>
-                        <div class="col-md-12 col-md-offset-3">
-                            <div class="container">
-                                <div class="form-group">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <asp:Label ID="criterioLabel" runat="server" Text="Detalle" Font-Bold="True" ValidateRequestMode="Inherit" Font-Size="Large"></asp:Label>
-                                            <div class="form-row justify-content-center">
-                                                <asp:GridView ID="detalleGridView" runat="server" class="table table-condensed table-bordered table-responsive" AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" GridLines="None" BackColor="White">
-                                                    <AlternatingRowStyle BackColor="#999999" />
-                                                    <Columns>
-                                                        <asp:TemplateField ShowHeader="False">
-                                                            <ItemTemplate>
-                                                                <asp:Button ID="eliminarButton" class="btn btn-danger btn-sm" runat="server" CausesValidation="False" CommandName="Delete" Text="Remover" OnClick="removerLinkButton_Click"></asp:Button>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
-                                                        <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
-                                                        <asp:BoundField DataField="Precio" HeaderText="Precio" />
-                                                        <asp:BoundField DataField="Importe" HeaderText="Importe" />
-                                                    </Columns>
-                                                    <HeaderStyle BackColor="#999999" Font-Bold="True" />
-                                                </asp:GridView>
+                                    &nbsp;&nbsp;
+                                </div>
+                                <div class="col-md-12 col-md-offset-3">
+                                    <div class="container">
+                                        <div class="form-group">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <asp:Label ID="criterioLabel" runat="server" Text="Detalle" Font-Bold="True" ValidateRequestMode="Inherit" Font-Size="Large"></asp:Label>
+                                                    <div class="form-row justify-content-center">
+                                                        <asp:GridView ID="detalleGridView" runat="server" class="table table-condensed table-bordered table-responsive"
+                                                            AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" GridLines="None" BackColor="White">
+                                                            <AlternatingRowStyle BackColor="White" />
+                                                            <Columns>
+                                                                <asp:TemplateField ShowHeader="False">
+                                                                    <ItemTemplate>
+                                                                        <asp:Button ID="eliminarButton" class="btn btn-danger btn-sm" runat="server" CausesValidation="False"
+                                                                            CommandName="Delete" AutoPostBack="true" Text="Remover" OnClick="removerLinkButton_Click"></asp:Button>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
+                                                                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
+                                                                <asp:BoundField DataField="Precio" HeaderText="Precio" />
+                                                                <asp:BoundField DataField="Importe" HeaderText="Importe" />
+                                                            </Columns>
+                                                            <HeaderStyle BackColor="#009900" Font-Bold="True" />
+                                                        </asp:GridView>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="form-row">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class="form-group col-md-1">
                                 <asp:Label ID="Label11" runat="server" Text="ITBIS"></asp:Label>
                             </div>
 
-                            <div class="col-lg-1 p-0">
-                                <asp:TextBox class="form-control" ID="itbisTextBox" Text="0" ReadOnly="true" runat="server" Width="150px"></asp:TextBox>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div class="col-lg-1 p-0">
+                                        <asp:TextBox class="form-control" ID="itbisTextBox" Text="0" ReadOnly="true" runat="server" Width="150px"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class="form-group col-md-1">
                                 <asp:Label ID="Label12" runat="server" Text="SubT"></asp:Label>
                             </div>
 
-                            <div class="col-lg-1 p-0">
-                                <asp:TextBox class="form-control" ID="subtotalTextBox" Text="0" runat="server" ReadOnly="true" Width="150px"></asp:TextBox>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div class="col-lg-1 p-0">
+                                        <asp:TextBox class="form-control" ID="subtotalTextBox" Text="0" runat="server" ReadOnly="true" Width="150px"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class="form-group col-md-1">
                                 <asp:Label ID="Label13" runat="server" Text="Total"></asp:Label>
                             </div>
 
-                            <div class="col-lg-1 p-0">
-                                <asp:TextBox class="form-control" ID="totalTextBox" Text="0" runat="server" ReadOnly="true" Width="150px"></asp:TextBox>
-                            </div>
-                        </div>
+                                    <div class="col-lg-1 p-0">
+                                        <asp:TextBox class="form-control" ID="totalTextBox" Text="0" runat="server" ReadOnly="true" Width="150px"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                         <br>
                         <div class="panel-footer">
                             <div class="text-center">
@@ -162,7 +170,7 @@
                         </div>
                         <!-- Modal para mi Factura Rápida.// -->
                         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                            <div class="modal-dialog modal-sm" style="max-width:600px!important;min-width:300px!important">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Vista Rápida de Facturas</h5>
@@ -171,9 +179,10 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <div id="div1">
-                                            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                                        </div>
+                                        <%--Viewer--%>
+                                        <rsweb:ReportViewer ID="MyFacturasReportViewer" runat="server" ProcessingMode="Remote" Height="400px" Width="500px">
+                                            <ServerReport ReportPath="" ReportServerUrl="" />
+                                        </rsweb:ReportViewer>
                                     </div>
                                     <div class="modal-footer">
                                     </div>
@@ -186,8 +195,4 @@
             <!-- card.// -->
     </div>
     <br>
-</div>
-    </div>
-</div>
-    </div>
 </asp:Content>
