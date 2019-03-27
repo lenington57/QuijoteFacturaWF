@@ -71,7 +71,7 @@
                 <div class="modal-dialog modal-sm" style="max-width: 600px!important; min-width: 300px!important">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Vista Rápida de Facturas</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">REPORTE DEPARTAMENTOS</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

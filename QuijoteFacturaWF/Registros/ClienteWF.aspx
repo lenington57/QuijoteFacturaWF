@@ -13,6 +13,8 @@
                             <div class="form-group col-md-3">
                                 <asp:Label ID="Label2" runat="server" Text="Id"></asp:Label>
                                 <asp:TextBox class="form-control" ID="clienteIdTextBox" Text="0" type="number" runat="server" Width="110px"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="IdRFV" runat="server" ErrorMessage="No puede estar vacío" ControlToValidate="clienteIdTextBox" Display="Dynamic" ForeColor="Red" ValidationGroup="Guardar">*No puede estar vacío</asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="IdREV" runat="server" ErrorMessage="Solo Números" ForeColor="Red" ValidationExpression="^[0-9]*$" ControlToValidate="clienteIdTextBox" ValidationGroup="Guardar">Solo Números</asp:RegularExpressionValidator>
                             </div>
 
                             <div class="col-lg-1 p-0">
@@ -35,6 +37,8 @@
                                 <div class="form-group">
                                     <asp:Label ID="Label4" runat="server" Text="Nombre"></asp:Label>
                                     <asp:TextBox class="form-control" ID="nombreTextBox" placeholder="Nombre" runat="server"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="NombreRFV" runat="server" ErrorMessage="No puede estar vacío" ControlToValidate="nombreTextBox" Display="Dynamic" ForeColor="Red" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="NombreREV" runat="server" ErrorMessage="Solo Letras" ControlToValidate="nombreTextBox" ForeColor="Red" ValidationExpression="^[a-z &amp; A-Z]*$" ValidationGroup="Guardar">Solo Letras</asp:RegularExpressionValidator>                              
                                 </div>
                             </div>
                         </div>
@@ -74,7 +78,7 @@
                             <div class="text-center">
                                 <div class="form-group" style="display: inline-block">
                                     <asp:Button class="btn btn-primary btn-sm" ID="nuevoButton" runat="server" Text="Nuevo" OnClick="nuevoButton_Click" />
-                                    <asp:Button class="btn btn-success btn-sm" ID="guardarButton" runat="server" Text="Guardar" OnClick="guardarButton_Click" />
+                                    <asp:Button class="btn btn-success btn-sm" ID="guardarButton" runat="server" Text="Guardar" OnClick="guardarButton_Click" ValidationGroup="Guardar" />
                                     <asp:Button class="btn btn-danger btn-sm" ID="eliminarutton" runat="server" Text="Eliminar" OnClick="eliminarutton_Click" />
                                 </div>
                             </div>
@@ -86,6 +90,5 @@
             <!-- card.// -->
     </div>
     <br>
-    </div>
     </div>
 </asp:Content>

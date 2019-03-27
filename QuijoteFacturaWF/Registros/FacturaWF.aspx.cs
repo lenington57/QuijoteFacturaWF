@@ -13,6 +13,9 @@ namespace QuijoteFacturaWF.Registros
 {
     public partial class FacturaWF : System.Web.UI.Page
     {
+        public int Total = 0;
+        public double Itbis = 0;
+        double SubTotal = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -147,7 +150,7 @@ namespace QuijoteFacturaWF.Registros
             importeTextBox.Text = Metodos.Importe(cantidad, precio).ToString();
         }
 
-        private void LlenaValores()
+        private void LlenaValores(int importe)
         {
             List<FacturaDetalle> detalle = new List<FacturaDetalle>();
 
@@ -155,9 +158,7 @@ namespace QuijoteFacturaWF.Registros
             {
                 detalle = (List<FacturaDetalle>)detalleGridView.DataSource;
             }
-            int Total = 0;
-            double Itbis = 0;
-            double SubTotal = 0;
+            Total += importe;
             foreach (var item in detalle)
             {
                 Total += item.Importe;
@@ -218,32 +219,29 @@ namespace QuijoteFacturaWF.Registros
         {
             if (IsValid)
             {
-                List<FacturaDetalle> listDetalle = new List<FacturaDetalle>();
+                DateTime date = DateTime.Now.Date;
+                int cantidad = Utils.ToInt(cantidadTextBox.Text);
+                int precio = Utils.ToInt(precioTextBox.Text);
+                int importe = Utils.ToInt(importeTextBox.Text);
 
-                if (detalleGridView.DataSource != null)
+                Factura facturita = new Factura();
+                int productoId = Utils.ToIntObjetos(productoDropDownList.SelectedValue);
+                string descripcion = Metodos.Descripcion(productoId);
+
+                if (detalleGridView.Rows.Count != 0)
                 {
-                    listDetalle = (List<FacturaDetalle>)detalleGridView.DataSource;
+                    facturita.Detalle = (List<FacturaDetalle>)ViewState["FacturaDetalle"];
                 }
-                else
-                {
-                    DateTime date = DateTime.Now.Date;
-                    int cantidad = Utils.ToInt(cantidadTextBox.Text);
-                    int precio = Utils.ToInt(precioTextBox.Text);
-                    int importe = Utils.ToInt(importeTextBox.Text);
+                //LlenaValores(importe);
+                //Valores(importe);
+                totalTextBox.Text = importe.ToString();
+                FacturaDetalle detalle = new FacturaDetalle();
+                facturita.Detalle.Add(new FacturaDetalle(0, detalle.FacturaId, productoId, descripcion, cantidad, precio, importe));
 
-                    var dat = new DateTime(2019, 03, 15);
-                    int productoId = Utils.ToIntObjetos(productoDropDownList.SelectedValue);
-                    string descripcion = Metodos.Descripcion(productoId);
 
-                    Valores(importe);
-                    totalTextBox.Text = importe.ToString();
-                    FacturaDetalle detalle = new FacturaDetalle();
-                    listDetalle.Add(new FacturaDetalle(0, detalle.FacturaId, productoId, descripcion, cantidad, precio, importe));
-
-                    ViewState["FacturaDetalle"] = listDetalle;
-                    detalleGridView.DataSource = listDetalle;
-                    detalleGridView.DataBind();
-                }
+                ViewState["FacturaDetalle"] = facturita.Detalle;
+                detalleGridView.DataSource = ViewState["FacturaDetalle"];
+                detalleGridView.DataBind();
             }
         }
 

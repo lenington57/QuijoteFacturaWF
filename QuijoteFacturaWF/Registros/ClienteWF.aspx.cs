@@ -55,6 +55,23 @@ namespace QuijoteFacturaWF.Registros
             deudaTextBox.Text = cliente.Deuda.ToString();
         }
 
+        private bool HayErrores()
+        {
+            bool HayErrores = false;
+            if (noTelefonoTextBox.Text.Length !=10)
+            {
+                Utils.ShowToastr(this, "No es un Número de Teléfono correcto", "Error", "error");
+                HayErrores = true;
+            }
+            if (noCedulaTextBox.Text.Length != 11)
+            {
+                Utils.ShowToastr(this, "No es un Número de Cédula correcto", "Error", "error");
+                HayErrores = true;
+            }
+            return HayErrores;
+        }
+
+
         //Programación de los Botones
         protected void BuscarLinkButton_Click(object sender, EventArgs e)
         {
@@ -84,35 +101,42 @@ namespace QuijoteFacturaWF.Registros
             Repositorio<Cliente> repositorio = new Repositorio<Cliente>();
             Cliente cliente = new Cliente();
 
-            cliente = LlenaClase();
-
-            if (clienteIdTextBox.Text == "0")
+            if (HayErrores())
             {
-                paso = repositorio.Guardar(cliente);
-                Utils.ShowToastr(this, "Guardado", "Exito", "success");
-                LimpiaObjetos();
+                return;
             }
             else
             {
-                Repositorio<Cliente> repository = new Repositorio<Cliente>();
-                int id = Utils.ToInt(clienteIdTextBox.Text);
-                cliente = repository.Buscar(id);
+                cliente = LlenaClase();
 
-                if (cliente != null)
+                if (clienteIdTextBox.Text == "0")
                 {
-                    paso = repository.Modificar(LlenaClase());
-                    Utils.ShowToastr(this, "Modificado", "Exito", "success");
+                    paso = repositorio.Guardar(cliente);
+                    Utils.ShowToastr(this, "Guardado", "Exito", "success");
+                    LimpiaObjetos();
                 }
                 else
-                    Utils.ShowToastr(this, "Id no existe", "Error", "error");
-            }
+                {
+                    Repositorio<Cliente> repository = new Repositorio<Cliente>();
+                    int id = Utils.ToInt(clienteIdTextBox.Text);
+                    cliente = repository.Buscar(id);
 
-            if (paso)
-            {
-                LimpiaObjetos();
+                    if (cliente != null)
+                    {
+                        paso = repository.Modificar(LlenaClase());
+                        Utils.ShowToastr(this, "Modificado", "Exito", "success");
+                    }
+                    else
+                        Utils.ShowToastr(this, "Id no existe", "Error", "error");
+                }
+
+                if (paso)
+                {
+                    LimpiaObjetos();
+                }
+                else
+                    Utils.ShowToastr(this, "No se pudo guardar", "Error", "error");
             }
-            else
-                Utils.ShowToastr(this, "No se pudo guardar", "Error", "error");
         }
 
         protected void eliminarutton_Click(object sender, EventArgs e)
