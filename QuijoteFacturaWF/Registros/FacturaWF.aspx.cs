@@ -52,9 +52,9 @@ namespace QuijoteFacturaWF.Registros
             int id = Utils.ToInt(facturaIdTextBox.Text);
             MyFacturasReportViewer.ProcessingMode = ProcessingMode.Local;
             MyFacturasReportViewer.Reset();
-            MyFacturasReportViewer.LocalReport.ReportPath = Server.MapPath(@"~\Reportes\FacturaRecibo.rdlc");
+            MyFacturasReportViewer.LocalReport.ReportPath = Server.MapPath(@"~\Reportes\ReciboFactura.rdlc");
             MyFacturasReportViewer.LocalReport.DataSources.Clear();
-            MyFacturasReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DetalleDS", BLL.Metodos.FilFacturas(id)));
+            MyFacturasReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DetallesDS", BLL.Metodos.FilFacturas(id)));
             MyFacturasReportViewer.LocalReport.Refresh();
         }
 

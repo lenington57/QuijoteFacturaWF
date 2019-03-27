@@ -276,6 +276,17 @@
     <Content Include="ClientesDataSet.xss">
       <DependentUpon>ClientesDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="DepartamentoDataSet.xsc">
+      <DependentUpon>DepartamentoDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DepartamentoDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DepartamentoDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DepartamentoDataSet.xss">
+      <DependentUpon>DepartamentoDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="DetalleDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DetalleDataSet.Designer.cs</LastGenOutput>
@@ -283,6 +294,61 @@
     </None>
     <Content Include="DetalleDataSet.xss">
       <DependentUpon>DetalleDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="EntradaDataSet.xsc">
+      <DependentUpon>EntradaDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DetallesDataSet.xsc">
+      <DependentUpon>DetallesDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DetallesDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DetallesDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DetallesDataSet.xss">
+      <DependentUpon>DetallesDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="EntradaDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EntradaDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="EntradaDataSet.xss">
+      <DependentUpon>EntradaDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="FacturaDataSet.xsc">
+      <DependentUpon>FacturaDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="FacturaDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FacturaDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="FacturaDataSet.xss">
+      <DependentUpon>FacturaDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="PagoDataSet.xsc">
+      <DependentUpon>PagoDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="PagoDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PagoDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="PagoDataSet.xss">
+      <DependentUpon>PagoDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="ProductoDataSet.xsc">
+      <DependentUpon>ProductoDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="ProductoDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProductoDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="ProductoDataSet.xss">
+      <DependentUpon>ProductoDataSet.xsd</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
@@ -385,10 +451,30 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DepartamentoDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepartamentoDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DetalleDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DetalleDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DetallesDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DetallesDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="EntradaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntradaDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FacturaDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -399,6 +485,16 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PagoDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PagoDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ProductoDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductoDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registros\ClienteWF.aspx.cs">
@@ -458,6 +554,11 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="UsuarioDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsuarioDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Utilitarios\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -465,6 +566,17 @@
     <Content Include="Site.Master" />
     <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.0.0.min.map" />
+    <Content Include="UsuarioDataSet.xsc">
+      <DependentUpon>UsuarioDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="UsuarioDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>UsuarioDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="UsuarioDataSet.xss">
+      <DependentUpon>UsuarioDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -499,6 +611,13 @@
   <ItemGroup>
     <EmbeddedResource Include="Reportes\FacturaRecibo.rdlc" />
     <EmbeddedResource Include="Reportes\ListadoClientes.rdlc" />
+    <EmbeddedResource Include="Reportes\ListadoDepartamentos.rdlc" />
+    <EmbeddedResource Include="Reportes\ListadoEntradas.rdlc" />
+    <EmbeddedResource Include="Reportes\ListadoFacturas.rdlc" />
+    <EmbeddedResource Include="Reportes\ListadoPagos.rdlc" />
+    <EmbeddedResource Include="Reportes\ListadoProductos.rdlc" />
+    <EmbeddedResource Include="Reportes\ListadoUsuarios.rdlc" />
+    <EmbeddedResource Include="Reportes\ReciboFactura.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
