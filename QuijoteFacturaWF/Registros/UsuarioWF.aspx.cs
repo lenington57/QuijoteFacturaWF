@@ -4,6 +4,7 @@ using QuijoteFacturaWF.Utilitarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -12,6 +13,8 @@ namespace QuijoteFacturaWF.Registros
 {
     public partial class UsuarioWF : System.Web.UI.Page
     {
+        Repositorio<Usuario> repositorio = new Repositorio<Usuario>();
+        Expression<Func<Usuario, bool>> filtrar = x => true;
         protected void Page_Load(object sender, EventArgs e)
         {
             fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
@@ -55,6 +58,30 @@ namespace QuijoteFacturaWF.Registros
             cpasswordTextBox.Text = usuario.CPassword;
         }
 
+        private bool HayErrores()
+        {
+            bool HayErrores = false;
+
+            filtrar = t => t.Email.Equals(emailTextBox.Text);
+            string s = passwordTextBox.Text;
+            string ss = cpasswordTextBox.Text;
+            int comparacion = 0;
+            comparacion = String.Compare(s, ss);
+            if (comparacion != 0)
+            {
+                Utils.ShowToastr(this, "Las Contraseñas no son iguales", "Error", "error");
+                HayErrores = true;
+            }
+            if (repositorio.GetList(filtrar).Count() != 0)
+            {
+                Utils.ShowToastr(this, "Este email ya existe", "Error", "error");
+                HayErrores = true;
+            }
+
+            return HayErrores;
+        }
+
+
         //Programación de los Botones
         protected void BuscarLinkButton_Click(object sender, EventArgs e)
         {
@@ -84,35 +111,42 @@ namespace QuijoteFacturaWF.Registros
             Repositorio<Usuario> repositorio = new Repositorio<Usuario>();
             Usuario usuario = new Usuario();
 
-            usuario = LlenaClase();
-
-            if (usuarioIdTextBox.Text == "0")
+            if (HayErrores())
             {
-                paso = repositorio.Guardar(usuario);
-                Utils.ShowToastr(this, "Guardado", "Exito", "success");
-                LimpiaObjetos();
+                return;
             }
             else
             {
-                Repositorio<Usuario> repository = new Repositorio<Usuario>();
-                int id = Utils.ToInt(usuarioIdTextBox.Text);
-                usuario = repository.Buscar(id);
+                usuario = LlenaClase();
 
-                if (usuario != null)
+                if (usuarioIdTextBox.Text == "0")
                 {
-                    paso = repository.Modificar(LlenaClase());
-                    Utils.ShowToastr(this, "Modificado", "Exito", "success");
+                    paso = repositorio.Guardar(usuario);
+                    Utils.ShowToastr(this, "Guardado", "Exito", "success");
+                    LimpiaObjetos();
                 }
                 else
-                    Utils.ShowToastr(this, "Id no existe", "Error", "error");
-            }
+                {
+                    Repositorio<Usuario> repository = new Repositorio<Usuario>();
+                    int id = Utils.ToInt(usuarioIdTextBox.Text);
+                    usuario = repository.Buscar(id);
 
-            if (paso)
-            {
-                LimpiaObjetos();
+                    if (usuario != null)
+                    {
+                        paso = repository.Modificar(LlenaClase());
+                        Utils.ShowToastr(this, "Modificado", "Exito", "success");
+                    }
+                    else
+                        Utils.ShowToastr(this, "Id no existe", "Error", "error");
+                }
+
+                if (paso)
+                {
+                    LimpiaObjetos();
+                }
+                else
+                    Utils.ShowToastr(this, "No se pudo guardar", "Error", "error");
             }
-            else
-                Utils.ShowToastr(this, "No se pudo guardar", "Error", "error");
         }
 
         protected void eliminarutton_Click(object sender, EventArgs e)

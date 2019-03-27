@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
+    <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div class="form-row justify-content-center">
@@ -104,13 +104,13 @@
                                                     <asp:Label ID="criterioLabel" runat="server" Text="Detalle" Font-Bold="True" ValidateRequestMode="Inherit" Font-Size="Large"></asp:Label>
                                                     <div class="form-row justify-content-center">
                                                         <asp:GridView ID="detalleGridView" runat="server" class="table table-condensed table-bordered table-responsive"
-                                                            AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" GridLines="None" BackColor="White">
+                                                            AutoGenerateColumns="False" CellPadding="4" AllowPaging="true" PageSize="7"  ForeColor="Black" GridLines="None" BackColor="White" OnPageIndexChanging="detalleGridView_PageIndexChanging">
                                                             <AlternatingRowStyle BackColor="White" />
                                                             <Columns>
-                                                                <asp:TemplateField ShowHeader="False">
+                                                                <asp:TemplateField ShowHeader="False" HeaderText="Opciones">
                                                                     <ItemTemplate>
-                                                                        <asp:Button ID="eliminarButton" class="btn btn-danger btn-sm" runat="server" CausesValidation="False"
-                                                                            CommandName="Delete" AutoPostBack="true" Text="Remover" OnClick="removerLinkButton_Click"></asp:Button>
+                                                                        <asp:Button ID="Remover" runat="server" CausesValidation="false" CommandName="Select"
+                                                                            Text="Eliminar" class="btn btn-danger btn-sm" OnClick="Remover_Click"/>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
@@ -170,7 +170,7 @@
                         </div>
                         <!-- Modal para mi Factura Rápida.// -->
                         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-sm" style="max-width:600px!important;min-width:300px!important">
+                            <div class="modal-dialog modal-sm" style="max-width: 600px!important; min-width: 300px!important">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Vista Rápida de Facturas</h5>
@@ -195,4 +195,7 @@
             <!-- card.// -->
     </div>
     <br>
+</div>
+</div>
+    </div>
 </asp:Content>

@@ -13,9 +13,8 @@ namespace QuijoteFacturaWF.Registros
 {
     public partial class FacturaWF : System.Web.UI.Page
     {
-        public int Total = 0;
-        public double Itbis = 0;
-        double SubTotal = 0;
+        protected Factura fact = new Factura();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -149,68 +148,48 @@ namespace QuijoteFacturaWF.Registros
             precio = Utils.ToInt(precioTextBox.Text);
             importeTextBox.Text = Metodos.Importe(cantidad, precio).ToString();
         }
-
-        private void LlenaValores(int importe)
+        
+        protected void productoIdTextBox_TextChanged(object sender, EventArgs e)
         {
-            List<FacturaDetalle> detalle = new List<FacturaDetalle>();
 
-            if (detalleGridView.DataSource != null)
-            {
-                detalle = (List<FacturaDetalle>)detalleGridView.DataSource;
-            }
-            Total += importe;
-            foreach (var item in detalle)
-            {
-                Total += item.Importe;
-            }
-            Itbis = Total * 0.18f;
-            SubTotal = Total - Itbis;
-            subtotalTextBox.Text = SubTotal.ToString();
-            itbisTextBox.Text = Itbis.ToString();
-            totalTextBox.Text = Total.ToString();
         }
 
-        private void Valores(int importe)
+        private void LlenaValores()
         {
-            int Total = importe;
+            RepositorioFactura repositorio = new RepositorioFactura();
+            int total = 0;
+            List<FacturaDetalle>  lista = (List<FacturaDetalle>)ViewState["FacturaDetalle"];
+            foreach (var item in lista)
+            {
+                total += item.Importe;
+            }
+
             double Itbis = 0;
             double SubTotal = 0;
-
-            Itbis = Total * 0.18f;
-            SubTotal = Total - Itbis;
+            Itbis = total * 0.18f;
+            SubTotal = total - Itbis;
             subtotalTextBox.Text = SubTotal.ToString();
             itbisTextBox.Text = Itbis.ToString();
-            totalTextBox.Text = Total.ToString();
+            totalTextBox.Text = total.ToString();
         }
 
         private void RebajaValores()
         {
-            List<FacturaDetalle> detalle = new List<FacturaDetalle>();
-
-            if (detalleGridView.DataSource != null)
+            RepositorioFactura repositorio = new RepositorioFactura();
+            int total = 0;
+            List<FacturaDetalle> lista = (List<FacturaDetalle>)ViewState["FacturaDetalle"];
+            foreach (var item in lista)
             {
-                detalle = (List<FacturaDetalle>)detalleGridView.DataSource;
+                total += item.Importe;
             }
-            int Total = 0;
+            total *= (-1);
             double Itbis = 0;
             double SubTotal = 0;
-            foreach (var item in detalle)
-            {
-                Total -= item.Importe;
-            }
-            Total *= (-1);
-            Itbis = Total * 0.18f;
-            SubTotal = Total - Itbis;
+            Itbis = total * 0.18f;
+            SubTotal = total - Itbis;
             subtotalTextBox.Text = SubTotal.ToString();
             itbisTextBox.Text = Itbis.ToString();
-            totalTextBox.Text = Total.ToString();
-        }
-
-
-        //Eventos de los Objetos
-        protected void productoIdTextBox_TextChanged(object sender, EventArgs e)
-        {
-
+            totalTextBox.Text = total.ToString();
         }
 
 
@@ -232,9 +211,7 @@ namespace QuijoteFacturaWF.Registros
                 {
                     facturita.Detalle = (List<FacturaDetalle>)ViewState["FacturaDetalle"];
                 }
-                //LlenaValores(importe);
                 //Valores(importe);
-                totalTextBox.Text = importe.ToString();
                 FacturaDetalle detalle = new FacturaDetalle();
                 facturita.Detalle.Add(new FacturaDetalle(0, detalle.FacturaId, productoId, descripcion, cantidad, precio, importe));
 
@@ -242,16 +219,10 @@ namespace QuijoteFacturaWF.Registros
                 ViewState["FacturaDetalle"] = facturita.Detalle;
                 detalleGridView.DataSource = ViewState["FacturaDetalle"];
                 detalleGridView.DataBind();
+                LlenaValores();
             }
         }
-
-        protected void removerLinkButton_Click(object sender, EventArgs e)
-        {
-            RebajaValores();
-            detalleGridView.DataSource = null;
-            detalleGridView.DataBind();
-        }
-
+        
         protected void cantidadTextBox_TextChanged(object sender, EventArgs e)
         {
             LlenaPrecio();
@@ -345,10 +316,33 @@ namespace QuijoteFacturaWF.Registros
             }
         }
 
-        protected void FacturaGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void detalleGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             detalleGridView.DataSource = ViewState["FacturaDetalle"];
             detalleGridView.PageIndex = e.NewPageIndex;
+            detalleGridView.DataBind();
+        }
+
+        protected void Remover_Click(object sender, EventArgs e)
+        {
+            GridViewRow row = detalleGridView.SelectedRow;
+            ((List<FacturaDetalle>)ViewState["FacturaDetalle"]).RemoveAt(row.RowIndex);
+            detalleGridView.DataSource = ViewState["FacturaDetalle"];
+            detalleGridView.DataBind();
+
+            List<FacturaDetalle> detalle = new List<FacturaDetalle>();
+
+            if (detalleGridView.DataSource != null)
+            {
+                detalle = (List<FacturaDetalle>)detalleGridView.DataSource;
+            }
+            decimal Total = 0;
+            foreach (var item in detalle)
+            {
+                Total -= item.Precio;
+            }
+            RebajaValores();
+            detalleGridView.DataSource = null;
             detalleGridView.DataBind();
         }
     }
