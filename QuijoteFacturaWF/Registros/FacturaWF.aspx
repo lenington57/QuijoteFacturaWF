@@ -104,13 +104,13 @@
                                                     <asp:Label ID="criterioLabel" runat="server" Text="Detalle" Font-Bold="True" ValidateRequestMode="Inherit" Font-Size="Large"></asp:Label>
                                                     <div class="form-row justify-content-center">
                                                         <asp:GridView ID="detalleGridView" runat="server" class="table table-condensed table-bordered table-responsive"
-                                                            AutoGenerateColumns="False" CellPadding="4" AllowPaging="true" PageSize="7"  ForeColor="Black" GridLines="None" BackColor="White" OnPageIndexChanging="detalleGridView_PageIndexChanging">
+                                                            AutoGenerateColumns="False" CellPadding="4" AllowPaging="true" PageSize="7" ForeColor="Black" GridLines="None" BackColor="White" OnPageIndexChanging="detalleGridView_PageIndexChanging">
                                                             <AlternatingRowStyle BackColor="White" />
                                                             <Columns>
                                                                 <asp:TemplateField ShowHeader="False" HeaderText="Opciones">
                                                                     <ItemTemplate>
-                                                                        <asp:Button ID="Remover" runat="server" CausesValidation="false" CommandName="Select"
-                                                                            Text="Eliminar" class="btn btn-danger btn-sm" OnClick="Remover_Click"/>
+                                                                        <asp:Button ID="Remover" runat="server" CausesValidation="false" CommandName="Delete"
+                                                                            Text="Eliminar" class="btn btn-danger btn-sm" data-toggle="modal" data-target=".bd-ejemplo-modal-lg" OnClick="Remover_Click" />
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
@@ -189,13 +189,31 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!--Modal de confirmacion de eliminar-->
+                        <div class="modal fade bd-ejemplo-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content ">
+                                    <div class="modal-header bg-danger">
+                                        <h5 class="modal-title">¡Atencion!</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Estas seguro de eliminar este Articulo?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <asp:Button ID="Eliminar" runat="server" CssClass="btn btn-danger" Text="Si" OnClick="Eliminar_Click"/>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </article>
             </div>
             <!-- card.// -->
     </div>
     <br>
-</div>
-</div>
-    </div>
 </asp:Content>

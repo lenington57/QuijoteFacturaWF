@@ -326,7 +326,30 @@ namespace QuijoteFacturaWF.Registros
         protected void Remover_Click(object sender, EventArgs e)
         {
             GridViewRow row = detalleGridView.SelectedRow;
-            ((List<FacturaDetalle>)ViewState["FacturaDetalle"]).RemoveAt(row.RowIndex);
+            ((List<FacturaDetalle>)detalleGridView.DataSource).RemoveAt(row.RowIndex);
+            detalleGridView.DataSource = ViewState["FacturaDetalle"];
+            detalleGridView.DataBind();
+
+            List<FacturaDetalle> detalle = new List<FacturaDetalle>();
+
+            if (detalleGridView.DataSource != null)
+            {
+                detalle = (List<FacturaDetalle>)detalleGridView.DataSource;
+            }
+            decimal Total = 0;
+            foreach (var item in detalle)
+            {
+                Total -= item.Precio;
+            }
+            RebajaValores();
+            detalleGridView.DataSource = null;
+            detalleGridView.DataBind();
+        }
+
+        protected void Eliminar_Click(object sender, EventArgs e)
+        {
+            GridViewRow row = detalleGridView.SelectedRow;
+            ((List<FacturaDetalle>)detalleGridView.DataSource).RemoveAt(row.RowIndex);
             detalleGridView.DataSource = ViewState["FacturaDetalle"];
             detalleGridView.DataBind();
 
