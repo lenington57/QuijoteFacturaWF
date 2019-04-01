@@ -262,9 +262,6 @@
     <Content Include="Content\Login\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Content\Login\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\Login\vendor\bootstrap\css\bootstrap.min.css.map" />
-    <Content Include="DetalleDataSet.xsc">
-      <DependentUpon>DetalleDataSet.xsd</DependentUpon>
-    </Content>
     <Content Include="ClientesDataSet.xsc">
       <DependentUpon>ClientesDataSet.xsd</DependentUpon>
     </Content>
@@ -286,14 +283,6 @@
     </None>
     <Content Include="DepartamentoDataSet.xss">
       <DependentUpon>DepartamentoDataSet.xsd</DependentUpon>
-    </Content>
-    <None Include="DetalleDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DetalleDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="DetalleDataSet.xss">
-      <DependentUpon>DetalleDataSet.xsd</DependentUpon>
     </Content>
     <Content Include="EntradaDataSet.xsc">
       <DependentUpon>EntradaDataSet.xsd</DependentUpon>
@@ -330,6 +319,17 @@
     </Content>
     <Content Include="PagoDataSet.xsc">
       <DependentUpon>PagoDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="FinaDbDataSet.xsc">
+      <DependentUpon>FinaDbDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="FinaDbDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FinaDbDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="FinaDbDataSet.xss">
+      <DependentUpon>FinaDbDataSet.xsd</DependentUpon>
     </Content>
     <None Include="PagoDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
@@ -460,11 +460,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DepartamentoDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DetalleDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DetalleDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="DetallesDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -479,6 +474,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FacturaDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FinaDbDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinaDbDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -621,7 +621,9 @@
     <Content Include="Reportes\ListadoPagos.rdlc" />
     <Content Include="Reportes\ListadoProductos.rdlc" />
     <Content Include="Reportes\ListadoUsuarios.rdlc" />
-    <Content Include="Reportes\ReciboFactura.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reportes\ReciboFactura.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

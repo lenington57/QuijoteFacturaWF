@@ -360,7 +360,7 @@ namespace BLL
                   String.Format("toastr.{0}('{1}', '{2}');", type.ToLower(), message, title), addScriptTags: true);
         }
 
-        //Lista para el Detalle.
+        //Llenar la Descripción.
         public static string Descripcion(int IdLista)
         {
             Repositorio<Producto> repositorio = new Repositorio<Producto>();
@@ -382,6 +382,17 @@ namespace BLL
             list = repositorio.GetList(c => c.FacturaId == id);
 
             return list;
+        }
+
+        //Detalle para el Detalle.
+        public static FacturaDetalle Detalle(int IdLista)
+        {
+            Repositorio<FacturaDetalle> repositorio = new Repositorio<FacturaDetalle>();
+            FacturaDetalle detalle = new FacturaDetalle();
+            int id = IdLista;
+            detalle = repositorio.Buscar(id);
+
+            return detalle;
         }
 
         //Lista para el Importe del Detalle.

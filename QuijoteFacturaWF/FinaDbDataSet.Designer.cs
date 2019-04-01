@@ -20,9 +20,9 @@ namespace QuijoteFacturaWF {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("DetalleDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("FinaDbDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class DetalleDataSet : global::System.Data.DataSet {
+    public partial class FinaDbDataSet : global::System.Data.DataSet {
         
         private FacturaDetallesDataTable tableFacturaDetalles;
         
@@ -30,7 +30,7 @@ namespace QuijoteFacturaWF {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public DetalleDataSet() {
+        public FinaDbDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace QuijoteFacturaWF {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        protected DetalleDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected FinaDbDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -127,7 +127,7 @@ namespace QuijoteFacturaWF {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            DetalleDataSet cln = ((DetalleDataSet)(base.Clone()));
+            FinaDbDataSet cln = ((FinaDbDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -199,9 +199,9 @@ namespace QuijoteFacturaWF {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "DetalleDataSet";
+            this.DataSetName = "FinaDbDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/DetalleDataSet.xsd";
+            this.Namespace = "http://tempuri.org/FinaDbDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableFacturaDetalles = new FacturaDetallesDataTable();
@@ -225,7 +225,7 @@ namespace QuijoteFacturaWF {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            DetalleDataSet ds = new DetalleDataSet();
+            FinaDbDataSet ds = new FinaDbDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -565,7 +565,7 @@ namespace QuijoteFacturaWF {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DetalleDataSet ds = new DetalleDataSet();
+                FinaDbDataSet ds = new FinaDbDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -768,7 +768,7 @@ namespace QuijoteFacturaWF {
         }
     }
 }
-namespace QuijoteFacturaWF.DetalleDataSetTableAdapters {
+namespace QuijoteFacturaWF.FinaDbDataSetTableAdapters {
     
     
     /// <summary>
@@ -954,7 +954,7 @@ namespace QuijoteFacturaWF.DetalleDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DetalleDataSet.FacturaDetallesDataTable dataTable) {
+        public virtual int Fill(FinaDbDataSet.FacturaDetallesDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -967,9 +967,9 @@ namespace QuijoteFacturaWF.DetalleDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DetalleDataSet.FacturaDetallesDataTable GetData() {
+        public virtual FinaDbDataSet.FacturaDetallesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DetalleDataSet.FacturaDetallesDataTable dataTable = new DetalleDataSet.FacturaDetallesDataTable();
+            FinaDbDataSet.FacturaDetallesDataTable dataTable = new FinaDbDataSet.FacturaDetallesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -977,14 +977,14 @@ namespace QuijoteFacturaWF.DetalleDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DetalleDataSet.FacturaDetallesDataTable dataTable) {
+        public virtual int Update(FinaDbDataSet.FacturaDetallesDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DetalleDataSet dataSet) {
+        public virtual int Update(FinaDbDataSet dataSet) {
             return this.Adapter.Update(dataSet, "FacturaDetalles");
         }
         
@@ -1182,7 +1182,7 @@ namespace QuijoteFacturaWF.DetalleDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateUpdatedRows(DetalleDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(FinaDbDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._facturaDetallesTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.FacturaDetalles.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
@@ -1201,7 +1201,7 @@ namespace QuijoteFacturaWF.DetalleDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateInsertedRows(DetalleDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(FinaDbDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._facturaDetallesTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.FacturaDetalles.Select(null, null, global::System.Data.DataViewRowState.Added);
@@ -1219,7 +1219,7 @@ namespace QuijoteFacturaWF.DetalleDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateDeletedRows(DetalleDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(FinaDbDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             if ((this._facturaDetallesTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.FacturaDetalles.Select(null, null, global::System.Data.DataViewRowState.Deleted);
@@ -1261,7 +1261,7 @@ namespace QuijoteFacturaWF.DetalleDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public virtual int UpdateAll(DetalleDataSet dataSet) {
+        public virtual int UpdateAll(FinaDbDataSet dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

@@ -61,7 +61,7 @@ namespace BLL
             Repositorio<Factura> repositorio = new Repositorio<Factura>();
             try
             {
-                var FactAnt = repositorio.Buscar(factura.FacturaId);
+                var FactAnt = contexto.Factura.Find(factura.FacturaId);
 
                 if (factura.ClienteId != FactAnt.ClienteId)
                 {
@@ -90,7 +90,7 @@ namespace BLL
                         contexto.Entry(item).State = estado;
                     }
                     //Limpiando el Contexto.
-                    contexto = new Contexto();
+                    //repositorio.Modificar(factura);
                     contexto.Entry(factura).State = EntityState.Modified;
                 }
 

@@ -14,8 +14,7 @@ namespace QuijoteFacturaWF.Registros
     public partial class FacturaWF : System.Web.UI.Page
     {
         public Factura facturita = new Factura();
-
-        protected Factura fact = new Factura();
+        List<FacturaDetalle> lista = new List<FacturaDetalle>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -58,7 +57,7 @@ namespace QuijoteFacturaWF.Registros
             MyFacturasReportViewer.Reset();
             MyFacturasReportViewer.LocalReport.ReportPath = Server.MapPath(@"~\Reportes\ReciboFactura.rdlc");
             MyFacturasReportViewer.LocalReport.DataSources.Clear();
-            MyFacturasReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DetallesDS", BLL.Metodos.FilFacturas(id)));
+            MyFacturasReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DetallesDS", Metodos.ListaDetalle(Utils.ToInt(facturaIdTextBox.Text))));
             MyFacturasReportViewer.LocalReport.Refresh();
         }
 
@@ -203,6 +202,7 @@ namespace QuijoteFacturaWF.Registros
         //Programación de los Botones
         protected void agregarLinkButton_Click(object sender, EventArgs e)
         {
+            List<FacturaDetalle> detalles = new List<FacturaDetalle>();
             if (IsValid)
             {
                 DateTime date = DateTime.Now.Date;
@@ -220,8 +220,7 @@ namespace QuijoteFacturaWF.Registros
 
                 FacturaDetalle detalle = new FacturaDetalle();
                 facturita.Detalle.Add(new FacturaDetalle(0, detalle.FacturaId, productoId, descripcion, cantidad, precio, importe));
-
-
+                
                 ViewState["FacturaDetalle"] = facturita.Detalle;
                 detalleGridView.DataSource = ViewState["FacturaDetalle"];
                 detalleGridView.DataBind();
@@ -234,22 +233,28 @@ namespace QuijoteFacturaWF.Registros
             LlenaValores();
         }
 
+
         private void Remover()
         {
-            GridViewRow row = detalleGridView.SelectedRow;
-            List<FacturaDetalle> lista = (List<FacturaDetalle>)detalleGridView.DataSource;
-            int fila = 0;
-            fila = lista.Count();
-            //Utils.ShowToastr(this,fila.ToString(), "Error", "error");
-            //fila = row.RowIndex;
-            //lista.RemoveAt(fila);
-            //detalleGridView.DataSource = lista;
-            //detalleGridView.DataBind();
+            List<FacturaDetalle> list = Metodos.ListaDetalle(Utils.ToInt(facturaIdTextBox.Text));
+            //GridViewRow row = detalleGridView.SelectedRow;
+            //int fila = row.RowIndex;
+            list.RemoveAt(0);
+            detalleGridView.DataSource = list;
+            detalleGridView.DataBind();
         }
 
         protected void removerButton_Click(object sender, EventArgs e)
         {
-            Remover();
+            List<FacturaDetalle> list = Metodos.ListaDetalle(Utils.ToInt(facturaIdTextBox.Text));
+            
+            Button btn = (Button)sender;
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            int indexdeboton = gvr.RowIndex;
+            list.RemoveAt(indexdeboton);
+            detalleGridView.DataSource = list;
+            detalleGridView.DataBind();
+            //Remover();
             //int cantidad = 0;
             //GridViewRow row = detalleGridView.SelectedRow;
             //List<FacturaDetalle> lista = (List<FacturaDetalle>)detalleGridView.DataSource;
@@ -364,6 +369,7 @@ namespace QuijoteFacturaWF.Registros
             RepositorioFactura repositorio = new RepositorioFactura();
 
             var factura = repositorio.Buscar(Utils.ToInt(facturaIdTextBox.Text));
+            lista = factura.Detalle;
             if (factura != null)
             {
                 Utils.ShowToastr(this, "Busqueda exitosa", "Exito", "success");

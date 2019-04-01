@@ -102,34 +102,39 @@
                                     </div>
                             &nbsp;&nbsp;
                         </div>
-                        <hr>
-                        <div class="col-md-12 col-md-offset-3">
-                            <div class="container">
-                                <div class="form-group">
-                                    <asp:Label ID="criterioLabel" runat="server" Text="Detalle" Font-Bold="True" ValidateRequestMode="Inherit" Font-Size="Large"></asp:Label>
-                                    <div class="form-row justify-content-center">
-                                        <asp:GridView ID="detalleGridView" runat="server" class="table table-condensed table-bordered table-responsive"
-                                            AutoGenerateColumns="False" CellPadding="4" AllowPaging="True" PageSize="7" ForeColor="Black" GridLines="None"
-                                            BackColor="White" OnPageIndexChanging="detalleGridView_PageIndexChanging">
-                                            <AlternatingRowStyle BackColor="White" />
-                                            <Columns>
-                                                <asp:TemplateField ShowHeader="False">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="removerLinkButton" runat="server" CausesValidation="False" CommandName="Select" Text="Remover" OnClick="removerButton_Click"></asp:LinkButton>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
-                                                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
-                                                <asp:BoundField DataField="Precio" HeaderText="Precio" />
-                                                <asp:BoundField DataField="Importe" HeaderText="Importe" />
-                                            </Columns>
-                                            <HeaderStyle BackColor="#009900" Font-Bold="True" />
-                                        </asp:GridView>
+                        <div class="table-responsive">
+                            <hr>
+                            <div class="col-md-12 col-md-offset-3">
+                                <div class="container">
+                                    <div class="form-group">
+                                        <asp:Label ID="criterioLabel" runat="server" Text="Detalle" Font-Bold="True" ValidateRequestMode="Inherit" Font-Size="Large"></asp:Label>
+                                        <div class="form-row justify-content-center">
+                                            <asp:GridView ID="detalleGridView" runat="server" class="table table-condensed table-bordered table-responsive"
+                                                AutoGenerateColumns="False" CellPadding="8" AllowPaging="True" PageSize="7" ForeColor="Black" GridLines="None"
+                                                BackColor="White" OnPageIndexChanging="detalleGridView_PageIndexChanging">
+                                                <AlternatingRowStyle BackColor="White" />
+                                                <Columns>
+                                                    <asp:TemplateField ShowHeader="False">
+                                                        <ItemTemplate>
+                                                            <asp:Button ID="removerLinkButton" runat="server" CausesValidation="False" CommandName="Select" Text="Remover" OnClick="removerButton_Click"></asp:Button>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:BoundField DataField="Id" HeaderText="Id" />
+                                                    <asp:BoundField DataField="FacturaId" HeaderText="FacturaId" />
+                                                    <asp:BoundField DataField="ProductoId" HeaderText="ProductoId" />
+                                                    <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
+                                                    <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
+                                                    <asp:BoundField DataField="Precio" HeaderText="Precio" />
+                                                    <asp:BoundField DataField="Importe" HeaderText="Importe" />
+                                                </Columns>
+                                                <HeaderStyle BackColor="#009900" Font-Bold="True" />
+                                            </asp:GridView>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <hr>
                         </div>
-                        <hr>
                         <asp:UpdatePanel ID="facturaUP" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <div class="form-row">
