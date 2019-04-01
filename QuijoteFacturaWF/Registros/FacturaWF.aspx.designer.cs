@@ -58,6 +58,24 @@ namespace QuijoteFacturaWF.Registros {
         protected global::System.Web.UI.WebControls.TextBox facturaIdTextBox;
         
         /// <summary>
+        /// IdRFV control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator IdRFV;
+        
+        /// <summary>
+        /// IdREV control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator IdREV;
+        
+        /// <summary>
         /// BuscarLinkButton control.
         /// </summary>
         /// <remarks>
@@ -130,15 +148,6 @@ namespace QuijoteFacturaWF.Registros {
         protected global::System.Web.UI.WebControls.DropDownList productoDropDownList;
         
         /// <summary>
-        /// detalleUP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel detalleUP;
-        
-        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>
@@ -155,6 +164,24 @@ namespace QuijoteFacturaWF.Registros {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox cantidadTextBox;
+        
+        /// <summary>
+        /// cantidadRFV control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator cantidadRFV;
+        
+        /// <summary>
+        /// cantidadREV control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator cantidadREV;
         
         /// <summary>
         /// Label2 control.
@@ -202,6 +229,15 @@ namespace QuijoteFacturaWF.Registros {
         protected global::System.Web.UI.WebControls.LinkButton agregarLinkButton;
         
         /// <summary>
+        /// CalcularLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton CalcularLinkButton;
+        
+        /// <summary>
         /// criterioLabel control.
         /// </summary>
         /// <remarks>
@@ -218,6 +254,15 @@ namespace QuijoteFacturaWF.Registros {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView detalleGridView;
+        
+        /// <summary>
+        /// facturaUP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel facturaUP;
         
         /// <summary>
         /// Label11 control.

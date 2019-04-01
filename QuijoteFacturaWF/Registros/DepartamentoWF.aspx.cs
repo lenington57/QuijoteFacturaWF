@@ -40,6 +40,18 @@ namespace QuijoteFacturaWF.Registros
             nombreTextBox.Text = departamento.Nombre;
         }
 
+        private bool HayErrores()
+        {
+            bool HayErrores = false;
+
+            if (String.IsNullOrWhiteSpace(departamentoIdTextBox.Text))
+            {
+                Utils.ShowToastr(this, "Debe tener un Id para guardar", "Error", "error");
+                HayErrores = true;
+            }
+            return HayErrores;
+        }
+
         //Progrmación de los Botones
         protected void BuscarLinkButton_Click(object sender, EventArgs e)
         {
@@ -68,28 +80,34 @@ namespace QuijoteFacturaWF.Registros
             bool paso = false;
             Repositorio<Departamento> repositorio = new Repositorio<Departamento>();
             Departamento departamento = new Departamento();
-
-            departamento = LlenaClase();
-
-            if (departamentoIdTextBox.Text == "0")
+            if (HayErrores())
             {
-                paso = repositorio.Guardar(departamento);
-                Utils.ShowToastr(this, "Guardado", "Exito", "success");
-                LimpiaObjetos();
+                return;
             }
             else
             {
-                Repositorio<Departamento> repository = new Repositorio<Departamento>();
-                int id = Utils.ToInt(departamentoIdTextBox.Text);
-                departamento = repository.Buscar(id);
+                departamento = LlenaClase();
 
-                if (departamento != null)
+                if (departamentoIdTextBox.Text == "0")
                 {
-                    paso = repository.Modificar(LlenaClase());
-                    Utils.ShowToastr(this, "Modificado", "Exito", "success");
+                    paso = repositorio.Guardar(departamento);
+                    Utils.ShowToastr(this, "Guardado", "Exito", "success");
+                    LimpiaObjetos();
                 }
                 else
-                    Utils.ShowToastr(this, "Id no existe", "Error", "error");
+                {
+                    Repositorio<Departamento> repository = new Repositorio<Departamento>();
+                    int id = Utils.ToInt(departamentoIdTextBox.Text);
+                    departamento = repository.Buscar(id);
+
+                    if (departamento != null)
+                    {
+                        paso = repository.Modificar(LlenaClase());
+                        Utils.ShowToastr(this, "Modificado", "Exito", "success");
+                    }
+                    else
+                        Utils.ShowToastr(this, "Id no existe", "Error", "error");
+                }
             }
 
             if (paso)

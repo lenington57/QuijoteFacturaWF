@@ -58,11 +58,24 @@ namespace QuijoteFacturaWF.Registros
             cpasswordTextBox.Text = usuario.CPassword;
         }
 
+        private bool VEmail()
+        {
+            bool HayErrores = false;
+            filtrar = t => t.Email.Equals(emailTextBox.Text);
+
+            if (repositorio.GetList(filtrar).Count() != 0)
+            {
+                Utils.ShowToastr(this, "Este email ya existe", "Error", "error");
+                HayErrores = true;
+            }
+            return HayErrores;
+        }
+
+
         private bool HayErrores()
         {
             bool HayErrores = false;
-
-            filtrar = t => t.Email.Equals(emailTextBox.Text);
+            
             string s = passwordTextBox.Text;
             string ss = cpasswordTextBox.Text;
             int comparacion = 0;
@@ -72,12 +85,16 @@ namespace QuijoteFacturaWF.Registros
                 Utils.ShowToastr(this, "Las Contraseñas no son iguales", "Error", "error");
                 HayErrores = true;
             }
-            if (repositorio.GetList(filtrar).Count() != 0)
+            if (noTelefonoTextBox.Text.Length != 10)
             {
-                Utils.ShowToastr(this, "Este email ya existe", "Error", "error");
+                Utils.ShowToastr(this, "No es un Número de Teléfono correcto", "Error", "error");
                 HayErrores = true;
             }
-
+            if (String.IsNullOrWhiteSpace(usuarioIdTextBox.Text))
+            {
+                Utils.ShowToastr(this, "Debe tener un Id para guardar", "Error", "error");
+                HayErrores = true;
+            }
             return HayErrores;
         }
 
@@ -133,8 +150,14 @@ namespace QuijoteFacturaWF.Registros
 
                     if (usuario != null)
                     {
+                        if (VEmail())
+                        {
+                            return;
+                        }
+                        else { 
                         paso = repository.Modificar(LlenaClase());
                         Utils.ShowToastr(this, "Modificado", "Exito", "success");
+                        }
                     }
                     else
                         Utils.ShowToastr(this, "Id no existe", "Error", "error");

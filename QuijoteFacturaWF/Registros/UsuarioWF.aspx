@@ -94,6 +94,4 @@
             <!-- card.// -->
     </div>
     <br>
-</div>
-    </div>
 </asp:Content>

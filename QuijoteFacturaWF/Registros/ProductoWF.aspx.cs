@@ -68,6 +68,22 @@ namespace QuijoteFacturaWF.Registros
             canInvTextBox.Text = producto.CantidadIventario.ToString();
         }
 
+        private bool HayErrores()
+        {
+            bool HayErrores = false;
+            if (Utils.ToIntObjetos(departamentoDropDownList.SelectedValue) < 1)
+            {
+                Utils.ShowToastr(this, "Debe tener al menos un Departamento guardado", "Error", "error");
+                HayErrores = true;
+            }
+            if (String.IsNullOrWhiteSpace(productoIdTextBox.Text))
+            {
+                Utils.ShowToastr(this, "Debe tener un Id para guardar", "Error", "error");
+                HayErrores = true;
+            }
+            return HayErrores;
+        }
+
         //Programación de los Botones
         protected void BuscarLinkButton_Click(object sender, EventArgs e)
         {

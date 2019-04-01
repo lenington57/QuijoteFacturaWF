@@ -350,6 +350,8 @@
     <Content Include="ProductoDataSet.xss">
       <DependentUpon>ProductoDataSet.xsd</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\quijotefactura - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\quijotefactura - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -378,7 +380,9 @@
     <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -609,15 +613,15 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reportes\FacturaRecibo.rdlc" />
-    <EmbeddedResource Include="Reportes\ListadoClientes.rdlc" />
-    <EmbeddedResource Include="Reportes\ListadoDepartamentos.rdlc" />
-    <EmbeddedResource Include="Reportes\ListadoEntradas.rdlc" />
-    <EmbeddedResource Include="Reportes\ListadoFacturas.rdlc" />
-    <EmbeddedResource Include="Reportes\ListadoPagos.rdlc" />
-    <EmbeddedResource Include="Reportes\ListadoProductos.rdlc" />
-    <EmbeddedResource Include="Reportes\ListadoUsuarios.rdlc" />
-    <EmbeddedResource Include="Reportes\ReciboFactura.rdlc" />
+    <Content Include="Reportes\FacturaRecibo.rdlc" />
+    <Content Include="Reportes\ListadoClientes.rdlc" />
+    <Content Include="Reportes\ListadoDepartamentos.rdlc" />
+    <Content Include="Reportes\ListadoEntradas.rdlc" />
+    <Content Include="Reportes\ListadoFacturas.rdlc" />
+    <Content Include="Reportes\ListadoPagos.rdlc" />
+    <Content Include="Reportes\ListadoProductos.rdlc" />
+    <Content Include="Reportes\ListadoUsuarios.rdlc" />
+    <Content Include="Reportes\ReciboFactura.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

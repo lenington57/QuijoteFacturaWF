@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Security;
 using System.Web.UI;
 
 namespace BLL
@@ -17,6 +18,21 @@ namespace BLL
             int.TryParse(valor, out retorno);
 
             return retorno;
+        }
+
+        //Para verificar el inicio de sesión.
+        public static void Autenticar(string email, string password, Page page)
+        {
+            Repositorio<Usuario> repositorio = new Repositorio<Usuario>();
+            Expression<Func<Usuario, bool>> filtrar = x => true;
+            Usuario usuario = new Usuario();
+
+            filtrar = t => t.Email.Equals(email) && t.Password.Equals(password);
+
+            if (repositorio.GetList(filtrar).Count() != 0)
+                FormsAuthentication.RedirectFromLoginPage(usuario.Email, true);
+            else
+                ShowToastr(page, "Email o Contraseña incorrectos", "Error", "error");
         }
 
         //Métodos que retornan la lista en el Imprimir de las Consultas (Reportes).

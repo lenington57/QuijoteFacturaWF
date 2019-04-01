@@ -4,6 +4,7 @@ using QuijoteFacturaWF.Utilitarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -12,6 +13,8 @@ namespace QuijoteFacturaWF.Registros
 {
     public partial class ClienteWF : System.Web.UI.Page
     {
+        Repositorio<Cliente> repositorio = new Repositorio<Cliente>();
+        Expression<Func<Cliente, bool>> filtrar = x => true;
         protected void Page_Load(object sender, EventArgs e)
         {
             fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
@@ -55,6 +58,19 @@ namespace QuijoteFacturaWF.Registros
             deudaTextBox.Text = cliente.Deuda.ToString();
         }
 
+        private bool VEmail()
+        {
+            bool HayErrores = false;
+            filtrar = t => t.NoCedula.Equals(noCedulaTextBox.Text);
+
+            if (repositorio.GetList(filtrar).Count() != 0)
+            {
+                Utils.ShowToastr(this, "Esta Cédula ya existe", "Error", "error");
+                HayErrores = true;
+            }
+            return HayErrores;
+        }
+
         private bool HayErrores()
         {
             bool HayErrores = false;
@@ -66,6 +82,11 @@ namespace QuijoteFacturaWF.Registros
             if (noCedulaTextBox.Text.Length != 11)
             {
                 Utils.ShowToastr(this, "No es un Número de Cédula correcto", "Error", "error");
+                HayErrores = true;
+            }
+            if (String.IsNullOrWhiteSpace(clienteIdTextBox.Text))
+            {
+                Utils.ShowToastr(this, "Debe tener un Id para guardar", "Error", "error");
                 HayErrores = true;
             }
             return HayErrores;
@@ -111,9 +132,15 @@ namespace QuijoteFacturaWF.Registros
 
                 if (clienteIdTextBox.Text == "0")
                 {
+                    if (VEmail())
+                    {
+                        return;
+                    }
+                    else { 
                     paso = repositorio.Guardar(cliente);
                     Utils.ShowToastr(this, "Guardado", "Exito", "success");
                     LimpiaObjetos();
+                    }
                 }
                 else
                 {

@@ -64,6 +64,11 @@ namespace QuijoteFacturaWF.Registros
                 Utils.ShowToastr(this, "Debe tener al menos un Producto guardado", "Error", "error");
                 HayErrores = true;
             }
+            if (String.IsNullOrWhiteSpace(entradaIdTextBox.Text))
+            {
+                Utils.ShowToastr(this, "Debe tener un Id para guardar", "Error", "error");
+                HayErrores = true;
+            }
             return HayErrores;
         }
 

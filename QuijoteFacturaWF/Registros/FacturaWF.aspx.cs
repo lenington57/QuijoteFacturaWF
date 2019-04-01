@@ -13,6 +13,8 @@ namespace QuijoteFacturaWF.Registros
 {
     public partial class FacturaWF : System.Web.UI.Page
     {
+        public Factura facturita = new Factura();
+
         protected Factura fact = new Factura();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -126,6 +128,11 @@ namespace QuijoteFacturaWF.Registros
                 Utils.ShowToastr(this, "Todavía no hay un Producto guardado.", "Error", "error");
                 HayErrores = true;
             }
+            if (String.IsNullOrWhiteSpace(facturaIdTextBox.Text))
+            {
+                Utils.ShowToastr(this, "Debe tener un Id para guardar", "Error", "error");
+                HayErrores = true;
+            }
             return HayErrores;
         }
 
@@ -202,8 +209,7 @@ namespace QuijoteFacturaWF.Registros
                 int cantidad = Utils.ToInt(cantidadTextBox.Text);
                 int precio = Utils.ToInt(precioTextBox.Text);
                 int importe = Utils.ToInt(importeTextBox.Text);
-
-                Factura facturita = new Factura();
+                
                 int productoId = Utils.ToIntObjetos(productoDropDownList.SelectedValue);
                 string descripcion = Metodos.Descripcion(productoId);
 
@@ -211,7 +217,7 @@ namespace QuijoteFacturaWF.Registros
                 {
                     facturita.Detalle = (List<FacturaDetalle>)ViewState["FacturaDetalle"];
                 }
-                //Valores(importe);
+
                 FacturaDetalle detalle = new FacturaDetalle();
                 facturita.Detalle.Add(new FacturaDetalle(0, detalle.FacturaId, productoId, descripcion, cantidad, precio, importe));
 
@@ -219,10 +225,64 @@ namespace QuijoteFacturaWF.Registros
                 ViewState["FacturaDetalle"] = facturita.Detalle;
                 detalleGridView.DataSource = ViewState["FacturaDetalle"];
                 detalleGridView.DataBind();
-                LlenaValores();
+                //LlenaValores();
             }
         }
-        
+
+        protected void CalcularLinkButton_Click(object sender, EventArgs e)
+        {
+            LlenaValores();
+        }
+
+        private void Remover()
+        {
+            GridViewRow row = detalleGridView.SelectedRow;
+            List<FacturaDetalle> lista = (List<FacturaDetalle>)detalleGridView.DataSource;
+            int fila = 0;
+            fila = lista.Count();
+            //Utils.ShowToastr(this,fila.ToString(), "Error", "error");
+            //fila = row.RowIndex;
+            //lista.RemoveAt(fila);
+            //detalleGridView.DataSource = lista;
+            //detalleGridView.DataBind();
+        }
+
+        protected void removerButton_Click(object sender, EventArgs e)
+        {
+            Remover();
+            //int cantidad = 0;
+            //GridViewRow row = detalleGridView.SelectedRow;
+            //List<FacturaDetalle> lista = (List<FacturaDetalle>)detalleGridView.DataSource;
+            //lista.RemoveAt(row.RowIndex);
+            //cantidad = lista.Count;
+            //if (cantidad <= 0)
+            //{
+            //    Utils.ShowToastr(this, "No hay datos en el Grid", "Error", "error");
+            //    return;
+            //}
+            //else
+            //{
+            //    lista = (List<FacturaDetalle>)ViewState["FacturaDetalle"];
+            //    detalleGridView.DataSource = lista;
+            //    detalleGridView.DataBind();
+
+            //    List<FacturaDetalle> detalle = new List<FacturaDetalle>();
+
+            //    if (detalleGridView.DataSource != null)
+            //    {
+            //        detalle = (List<FacturaDetalle>)detalleGridView.DataSource;
+            //    }
+            //    decimal Total = 0;
+            //    foreach (var item in detalle)
+            //    {
+            //        Total -= item.Precio;
+            //    }
+            //    RebajaValores();
+            //    detalleGridView.DataSource = null;
+            //    detalleGridView.DataBind();
+            //}
+        }
+
         protected void cantidadTextBox_TextChanged(object sender, EventArgs e)
         {
             LlenaPrecio();
@@ -306,13 +366,13 @@ namespace QuijoteFacturaWF.Registros
             var factura = repositorio.Buscar(Utils.ToInt(facturaIdTextBox.Text));
             if (factura != null)
             {
-                LlenarCampos(factura);
                 Utils.ShowToastr(this, "Busqueda exitosa", "Exito", "success");
+                LlenarCampos(factura);
             }
             else
             {
                 LimpiaObjetos();
-                Utils.ShowToastr(this, "No se pudo encontrar el Préstamo especificado", "Error", "error");
+                Utils.ShowToastr(this, "No existe la Factura especificada", "Error", "error");
             }
         }
 
@@ -320,52 +380,6 @@ namespace QuijoteFacturaWF.Registros
         {
             detalleGridView.DataSource = ViewState["FacturaDetalle"];
             detalleGridView.PageIndex = e.NewPageIndex;
-            detalleGridView.DataBind();
-        }
-
-        protected void Remover_Click(object sender, EventArgs e)
-        {
-            GridViewRow row = detalleGridView.SelectedRow;
-            ((List<FacturaDetalle>)detalleGridView.DataSource).RemoveAt(row.RowIndex);
-            detalleGridView.DataSource = ViewState["FacturaDetalle"];
-            detalleGridView.DataBind();
-
-            List<FacturaDetalle> detalle = new List<FacturaDetalle>();
-
-            if (detalleGridView.DataSource != null)
-            {
-                detalle = (List<FacturaDetalle>)detalleGridView.DataSource;
-            }
-            decimal Total = 0;
-            foreach (var item in detalle)
-            {
-                Total -= item.Precio;
-            }
-            RebajaValores();
-            detalleGridView.DataSource = null;
-            detalleGridView.DataBind();
-        }
-
-        protected void Eliminar_Click(object sender, EventArgs e)
-        {
-            GridViewRow row = detalleGridView.SelectedRow;
-            ((List<FacturaDetalle>)detalleGridView.DataSource).RemoveAt(row.RowIndex);
-            detalleGridView.DataSource = ViewState["FacturaDetalle"];
-            detalleGridView.DataBind();
-
-            List<FacturaDetalle> detalle = new List<FacturaDetalle>();
-
-            if (detalleGridView.DataSource != null)
-            {
-                detalle = (List<FacturaDetalle>)detalleGridView.DataSource;
-            }
-            decimal Total = 0;
-            foreach (var item in detalle)
-            {
-                Total -= item.Precio;
-            }
-            RebajaValores();
-            detalleGridView.DataSource = null;
             detalleGridView.DataBind();
         }
     }

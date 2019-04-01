@@ -62,7 +62,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="ClienteUT.cs" />
+    <Compile Include="FacturaUT.cs" />
+    <Compile Include="ProductoUT.cs" />
+    <Compile Include="UsuarioUT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +73,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{f87bd5a1-0a8f-4776-86f4-e9b4432bd607}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{255e54f1-4450-468f-9659-a977eed30641}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{77f941ef-ed4e-4663-b320-a4aecec54974}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QuijoteFacturaWF\QuijoteFacturaWF.csproj">
       <Project>{B95F7186-7F23-493F-A06B-C8F6EC0CE4DF}</Project>
       <Name>QuijoteFacturaWF</Name>
