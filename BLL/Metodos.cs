@@ -373,6 +373,32 @@ namespace BLL
             return desc;
         }
 
+        //Llenar la Descripción.
+        public static string Usuario(int IdLista)
+        {
+            Repositorio<Usuario> repositorio = new Repositorio<Usuario>();
+            Usuario usuario = new Usuario();
+            int id = IdLista;
+            usuario = repositorio.Buscar(id);
+
+            string desc = usuario.Nombres;
+
+            return desc;
+        }
+
+        //Llenar la Cliente.
+        public static string Cliente(int IdLista)
+        {
+            Repositorio<Cliente> repositorio = new Repositorio<Cliente>();
+            Cliente cliente = new Cliente();
+            int id = IdLista;
+            cliente = repositorio.Buscar(id);
+
+            string desc = cliente.Nombres;
+
+            return desc;
+        }
+
         //Lista para el Detalle.
         public static List<FacturaDetalle> ListaDetalle(int IdLista)
         {

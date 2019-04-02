@@ -94,8 +94,13 @@ namespace BLL
                     contexto.Entry(factura).State = EntityState.Modified;
                 }
 
-                Modifica(factura, FactAnt, contexto);
+                double modificado = factura.Total - FactAnt.Total;
+                Repositorio<Cliente> repository = new Repositorio<Cliente>();
+                var Cliente = repository.Buscar(factura.ClienteId);
+                Cliente.Deuda += Convert.ToInt32(modificado);
+                repository.Modificar(Cliente);
 
+                contexto = new Contexto();
                 if (contexto.SaveChanges() > 0)
                 {
                     paso = true;
@@ -107,17 +112,6 @@ namespace BLL
                 throw;
             }
             return paso;
-        }
-
-
-
-        public static void Modifica(Factura factura, Factura FactAnt, Contexto contexto)
-        {
-            double modificado = factura.Total - FactAnt.Total;
-            Repositorio<Cliente> repositorio = new Repositorio<Cliente>();
-            var Cliente = contexto.Cliente.Find(factura.FacturaId);
-            Cliente.Deuda += Convert.ToInt32(modificado);
-            repositorio.Modificar(Cliente);
         }
 
         public override bool Eliminar(int id)

@@ -51,8 +51,8 @@
                             <Columns>
                                 <asp:BoundField DataField="FacturaId" HeaderText="FacturaId" />
                                 <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
-                                <asp:BoundField DataField="UsuarioId" HeaderText="UsuarioId" />
-                                <asp:BoundField DataField="ClienteId" HeaderText="ClienteId" />
+                                <asp:BoundField DataField="ClienteId" HeaderText="Id del Cliente" />                                
+                                <asp:BoundField DataField="NombreCliente" HeaderText="Cliente" />
                                 <asp:BoundField DataField="SubTotal" HeaderText="SubTotal" />
                                 <asp:BoundField DataField="Itbis" HeaderText="Itbis" />
                                 <asp:BoundField DataField="Total" HeaderText="Total" />

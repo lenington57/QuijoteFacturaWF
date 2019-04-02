@@ -21,8 +21,8 @@ namespace QuijoteFacturaWF.Registros
         //Métodos
         private void LlenaCombo()
         {
-            Repositorio<Producto> repositorio = new Repositorio<Producto>();
-            productoDropDownList.DataSource = repositorio.GetList(c => true);
+            Repositorio<Producto> repository = new Repositorio<Producto>();
+            productoDropDownList.DataSource = repository.GetList(t => true);
             productoDropDownList.DataValueField = "ProductoId";
             productoDropDownList.DataTextField = "Descripcion";
             productoDropDownList.DataBind();
@@ -34,7 +34,7 @@ namespace QuijoteFacturaWF.Registros
 
             entrada.EntradaId = Utils.ToInt(entradaIdTextBox.Text);
             entrada.Fecha = Utils.ToDateTime(fechaTextBox.Text).Date;
-            entrada.ProductoId = Utils.ToInt(productoDropDownList.SelectedValue);
+            entrada.ProductoId = Utils.ToIntObjetos(productoDropDownList.SelectedValue);
             entrada.Cantidad = Utils.ToInt(cantidadTextBox.Text);
 
             return entrada;
@@ -51,6 +51,7 @@ namespace QuijoteFacturaWF.Registros
         public void LlenaCampos(Entrada entrada)
         {
             LimpiaObjetos();
+            entradaIdTextBox.Text = entrada.EntradaId.ToString();
             fechaTextBox.Text = entrada.Fecha.ToString("yyyy-MM-dd");
             productoDropDownList.SelectedValue = entrada.ProductoId.ToString();
             cantidadTextBox.Text = entrada.Cantidad.ToString();

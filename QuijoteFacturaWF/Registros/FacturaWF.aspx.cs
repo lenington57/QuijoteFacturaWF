@@ -4,6 +4,7 @@ using Microsoft.Reporting.WebForms;
 using QuijoteFacturaWF.Utilitarios;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,8 +15,9 @@ namespace QuijoteFacturaWF.Registros
     public partial class FacturaWF : System.Web.UI.Page
     {
         public Factura facturita = new Factura();
-        List<FacturaDetalle> lista = new List<FacturaDetalle>();
-
+        public List<FacturaDetalle> lista = new List<FacturaDetalle>();
+        List<FacturaDetalle> list = new List<FacturaDetalle>();
+        public int row;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -23,7 +25,7 @@ namespace QuijoteFacturaWF.Registros
                 fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 LlenaCombo();
                 ViewState["FacturaDetalle"] = new FacturaDetalle();
-
+                ViewState["Detalle"] = new Factura().Detalle;
                 LlenaReport();
             }
         }
@@ -67,25 +69,27 @@ namespace QuijoteFacturaWF.Registros
 
             factura.FacturaId = Utils.ToInt(facturaIdTextBox.Text);
             factura.Fecha = Convert.ToDateTime(fechaTextBox.Text).Date;
-            factura.UsuarioId = Utils.ToInt(usuarioDropDownList.SelectedValue);
-            factura.NombreUsuario = usuarioDropDownList.Text;
-            factura.ClienteId = Utils.ToInt(clienteDropDownList.SelectedValue);
-            factura.NombreCliente = clienteDropDownList.Text;
+            factura.UsuarioId = Utils.ToIntObjetos(usuarioDropDownList.SelectedValue);
+            factura.NombreUsuario = Metodos.Usuario(Utils.ToInt(usuarioDropDownList.SelectedValue));
+            factura.ClienteId = Utils.ToIntObjetos(clienteDropDownList.SelectedValue);
+            factura.NombreCliente = Metodos.Cliente(Utils.ToInt(clienteDropDownList.SelectedValue));
             factura.Itbis = Utils.ToDouble(itbisTextBox.Text);
             factura.SubTotal = Utils.ToDouble(subtotalTextBox.Text);
             factura.Total = Utils.ToInt(totalTextBox.Text);
             
-            factura.Detalle = (List<FacturaDetalle>)ViewState["FacturaDetalle"];
+            factura.Detalle = (List<FacturaDetalle>)ViewState["Detalle"];
 
             return factura;
         }
 
         public void LlenarCampos(Factura factura)
         {
+            List<FacturaDetalle> detalles = Metodos.ListaDetalle(Utils.ToInt(facturaIdTextBox.Text));
+            ViewState["Detalle"] = detalles;
             fechaTextBox.Text = factura.Fecha.ToString("yyyy-MM-dd");
             usuarioDropDownList.SelectedValue = factura.UsuarioId.ToString();
             clienteDropDownList.SelectedValue = factura.ClienteId.ToString();
-            detalleGridView.DataSource = Metodos.ListaDetalle(Utils.ToInt(facturaIdTextBox.Text));
+            detalleGridView.DataSource = ViewState["Detalle"];
             detalleGridView.DataBind();
             itbisTextBox.Text = factura.Itbis.ToString();
             subtotalTextBox.Text = factura.SubTotal.ToString();
@@ -157,14 +161,14 @@ namespace QuijoteFacturaWF.Registros
         
         protected void productoIdTextBox_TextChanged(object sender, EventArgs e)
         {
-
+            LlenaPrecio();
         }
 
         private void LlenaValores()
         {
             RepositorioFactura repositorio = new RepositorioFactura();
             int total = 0;
-            List<FacturaDetalle>  lista = (List<FacturaDetalle>)ViewState["FacturaDetalle"];
+            List<FacturaDetalle>  lista = (List<FacturaDetalle>)ViewState["Detalle"];
             foreach (var item in lista)
             {
                 total += item.Importe;
@@ -215,24 +219,23 @@ namespace QuijoteFacturaWF.Registros
 
                 if (detalleGridView.Rows.Count != 0)
                 {
-                    facturita.Detalle = (List<FacturaDetalle>)ViewState["FacturaDetalle"];
+                    facturita.Detalle = (List<FacturaDetalle>)ViewState["Detalle"];
                 }
 
                 FacturaDetalle detalle = new FacturaDetalle();
                 facturita.Detalle.Add(new FacturaDetalle(0, detalle.FacturaId, productoId, descripcion, cantidad, precio, importe));
                 
-                ViewState["FacturaDetalle"] = facturita.Detalle;
-                detalleGridView.DataSource = ViewState["FacturaDetalle"];
+                ViewState["Detalle"] = facturita.Detalle;
+                detalleGridView.DataSource = ViewState["Detalle"];
                 detalleGridView.DataBind();
-                //LlenaValores();
+                LlenaValores();
             }
         }
 
-        protected void CalcularLinkButton_Click(object sender, EventArgs e)
-        {
-            LlenaValores();
-        }
-
+        //protected void CalcularLinkButton_Click(object sender, EventArgs e)
+        //{
+        //    LlenaValores();
+        //}
 
         private void Remover()
         {
@@ -246,46 +249,26 @@ namespace QuijoteFacturaWF.Registros
 
         protected void removerButton_Click(object sender, EventArgs e)
         {
-            List<FacturaDetalle> list = Metodos.ListaDetalle(Utils.ToInt(facturaIdTextBox.Text));
-            
-            Button btn = (Button)sender;
-            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-            int indexdeboton = gvr.RowIndex;
-            list.RemoveAt(indexdeboton);
-            detalleGridView.DataSource = list;
-            detalleGridView.DataBind();
-            //Remover();
-            //int cantidad = 0;
-            //GridViewRow row = detalleGridView.SelectedRow;
-            //List<FacturaDetalle> lista = (List<FacturaDetalle>)detalleGridView.DataSource;
-            //lista.RemoveAt(row.RowIndex);
-            //cantidad = lista.Count;
-            //if (cantidad <= 0)
-            //{
-            //    Utils.ShowToastr(this, "No hay datos en el Grid", "Error", "error");
-            //    return;
-            //}
-            //else
-            //{
-            //    lista = (List<FacturaDetalle>)ViewState["FacturaDetalle"];
-            //    detalleGridView.DataSource = lista;
-            //    detalleGridView.DataBind();
-
-            //    List<FacturaDetalle> detalle = new List<FacturaDetalle>();
-
-            //    if (detalleGridView.DataSource != null)
-            //    {
-            //        detalle = (List<FacturaDetalle>)detalleGridView.DataSource;
-            //    }
-            //    decimal Total = 0;
-            //    foreach (var item in detalle)
-            //    {
-            //        Total -= item.Precio;
-            //    }
-            //    RebajaValores();
-            //    detalleGridView.DataSource = null;
-            //    detalleGridView.DataBind();
-            //}
+            detalleGridView.DataSource = ViewState["Detalle"];
+            if (Utils.ToInt(facturaIdTextBox.Text) == 0)
+            {
+                list = (List<FacturaDetalle>)detalleGridView.DataSource;
+                Button btn = (Button)sender;
+                GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+                int indexdeboton = gvr.RowIndex;
+                list.RemoveAt(indexdeboton);
+                detalleGridView.DataSource = ViewState["Detalle"];
+                detalleGridView.DataBind();
+                LlenaValores();
+            }                
+            else
+            {
+                list = Metodos.ListaDetalle(Utils.ToInt(facturaIdTextBox.Text));
+                list.RemoveAt(row);
+                detalleGridView.DataSource = list;
+                detalleGridView.DataBind();
+                LlenaValores();
+            }
         }
 
         protected void cantidadTextBox_TextChanged(object sender, EventArgs e)
@@ -329,6 +312,7 @@ namespace QuijoteFacturaWF.Registros
                     {
                         paso = repository.Modificar(LlenarClase());
                         Utils.ShowToastr(this, "Modificado", "Exito", "success");
+                        LimpiaObjetos();
                     }
                     else
                         Utils.ShowToastr(this, "Id no existe", "Error", "error");
@@ -369,7 +353,7 @@ namespace QuijoteFacturaWF.Registros
             RepositorioFactura repositorio = new RepositorioFactura();
 
             var factura = repositorio.Buscar(Utils.ToInt(facturaIdTextBox.Text));
-            lista = factura.Detalle;
+            lista = Metodos.ListaDetalle(Utils.ToInt(facturaIdTextBox.Text));
             if (factura != null)
             {
                 Utils.ShowToastr(this, "Busqueda exitosa", "Exito", "success");
@@ -387,6 +371,11 @@ namespace QuijoteFacturaWF.Registros
             detalleGridView.DataSource = ViewState["FacturaDetalle"];
             detalleGridView.PageIndex = e.NewPageIndex;
             detalleGridView.DataBind();
+        }
+
+        protected void detalleGridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            row = Utils.ToIntObjetos(detalleGridView.SelectedDataKey.Value);
         }
     }
 

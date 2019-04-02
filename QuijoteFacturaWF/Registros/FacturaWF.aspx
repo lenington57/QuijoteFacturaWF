@@ -94,12 +94,6 @@
                                 <span class="fas fa-search"></span>Agregar
                                 </asp:LinkButton>
                             </div>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="col-lg-1 p-0">
-                                        <asp:LinkButton ID="CalcularLinkButton" CssClass="btn btn-primary mt-4" runat="server" OnClick="CalcularLinkButton_Click">
-                                <span class="fas fa-search"></span>Calcular
-                                        </asp:LinkButton>
-                                    </div>
                             &nbsp;&nbsp;
                         </div>
                         <div class="table-responsive">
@@ -111,12 +105,12 @@
                                         <div class="form-row justify-content-center">
                                             <asp:GridView ID="detalleGridView" runat="server" class="table table-condensed table-bordered table-responsive"
                                                 AutoGenerateColumns="False" CellPadding="8" AllowPaging="True" PageSize="7" ForeColor="Black" GridLines="None"
-                                                BackColor="White" OnPageIndexChanging="detalleGridView_PageIndexChanging">
+                                                BackColor="White" OnPageIndexChanging="detalleGridView_PageIndexChanging" OnSelectedIndexChanged="detalleGridView_SelectedIndexChanged">
                                                 <AlternatingRowStyle BackColor="White" />
                                                 <Columns>
                                                     <asp:TemplateField ShowHeader="False">
                                                         <ItemTemplate>
-                                                            <asp:Button ID="removerLinkButton" runat="server" CausesValidation="False" CommandName="Select" Text="Remover" OnClick="removerButton_Click"></asp:Button>
+                                                            <asp:Button ID="removerLinkButton" class="btn btn-danger btn-sm" runat="server" CausesValidation="False" CommandName="Select" Text="Remover" OnClick="removerButton_Click"></asp:Button>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:BoundField DataField="Id" HeaderText="Id" />
@@ -227,6 +221,4 @@
             <!-- card.// -->
     </div>
     <br>
-    </div>
-    </div>
 </asp:Content>
