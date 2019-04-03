@@ -48,7 +48,7 @@
                             <div class="container">
                                 <div class="form-group">
                                     <asp:Label ID="Label5" runat="server" Text="Numero de Telefono"></asp:Label>
-                                    <asp:TextBox class="form-control" ID="noTelefonoTextBox" placeholder="000-000-0000" runat="server" MaxLength="10"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="noTelefonoTextBox" type="number" placeholder="000-000-0000" runat="server" MaxLength="10"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="noTelefonoRFV" runat="server" ErrorMessage="No puede estar vacío" ControlToValidate="noTelefonoTextBox" Display="Dynamic" ForeColor="Red" ValidationGroup="Guardar">*No puede estar vacío</asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="noTelefonoREV" runat="server" ErrorMessage="Solo Números" ForeColor="Red" ValidationExpression="^[0-9]*$" ControlToValidate="noTelefonoTextBox" ValidationGroup="Guardar">Solo Números</asp:RegularExpressionValidator>
                                 </div>

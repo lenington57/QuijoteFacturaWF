@@ -4,6 +4,7 @@ using QuijoteFacturaWF.Utilitarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -12,6 +13,8 @@ namespace QuijoteFacturaWF.Registros
 {
     public partial class DepartamentoWF : System.Web.UI.Page
     {
+        Repositorio<Departamento> repositorio = new Repositorio<Departamento>();
+        Expression<Func<Departamento, bool>> filtrar = x => true;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -37,6 +40,7 @@ namespace QuijoteFacturaWF.Registros
         public void LlenarCampos(Departamento departamento)
         {
             LimpiaObjetos();
+            departamentoIdTextBox.Text = departamento.DepartamentoId.ToString();
             nombreTextBox.Text = departamento.Nombre;
         }
 
@@ -44,6 +48,13 @@ namespace QuijoteFacturaWF.Registros
         {
             bool HayErrores = false;
 
+            filtrar = t => t.Nombre.Equals(nombreTextBox.Text);
+
+            if (repositorio.GetList(filtrar).Count() != 0)
+            {
+                Utils.ShowToastr(this, "Este Nombre ya existe", "Error", "error");
+                HayErrores = true;
+            }
             if (String.IsNullOrWhiteSpace(departamentoIdTextBox.Text))
             {
                 Utils.ShowToastr(this, "Debe tener un Id para guardar", "Error", "error");

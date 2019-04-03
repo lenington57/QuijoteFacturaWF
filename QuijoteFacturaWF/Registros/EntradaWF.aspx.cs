@@ -14,8 +14,11 @@ namespace QuijoteFacturaWF.Registros
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
-            LlenaCombo();
+            if (!Page.IsPostBack)
+            {
+                fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                LlenaCombo();
+            }
         }
 
         //Métodos
@@ -33,7 +36,8 @@ namespace QuijoteFacturaWF.Registros
             Entrada entrada = new Entrada();
 
             entrada.EntradaId = Utils.ToInt(entradaIdTextBox.Text);
-            entrada.Fecha = Utils.ToDateTime(fechaTextBox.Text).Date;
+            bool resultado = DateTime.TryParse(fechaTextBox.Text, out DateTime fecha);
+            entrada.Fecha = fecha;
             entrada.ProductoId = Utils.ToIntObjetos(productoDropDownList.SelectedValue);
             entrada.Cantidad = Utils.ToInt(cantidadTextBox.Text);
 

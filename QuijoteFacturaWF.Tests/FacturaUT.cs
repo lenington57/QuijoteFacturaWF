@@ -18,7 +18,7 @@ namespace QuijoteFacturaWF.Tests
         {
             RepositorioFactura repositorio = new RepositorioFactura();
             Factura factura = new Factura();
-            factura.FacturaId = 5;
+            factura.FacturaId = 15;
             factura.Fecha = DateTime.Now;
             factura.UsuarioId = 1;
             factura.NombreUsuario = "Lenington";
@@ -28,8 +28,8 @@ namespace QuijoteFacturaWF.Tests
             factura.SubTotal = 800f;
             factura.Total = 1000;
 
-            factura.Detalle.Add(new FacturaDetalle(0, 1, 1, "Salami Induveca", 2, 150, 300));
-            factura.Detalle.Add(new FacturaDetalle(0, 2, 1, "Queso Geo", 1, 200, 200));
+            factura.Detalle.Add(new FacturaDetalle(18, 15, 1, "Salami Induveca", 2, 150, 300));
+            factura.Detalle.Add(new FacturaDetalle(19, 15, 1, "Salami Don Pedro", 1, 200, 200));
 
             bool paso = repositorio.Guardar(factura);
             Assert.AreEqual(true, paso);
@@ -39,10 +39,10 @@ namespace QuijoteFacturaWF.Tests
         public void Modificar()
         {
             RepositorioFactura repositorio = new RepositorioFactura();
-            int id = 2;
+            int id = 15;
             var factura = repositorio.Buscar(id);
 
-            factura.Detalle.Add(new FacturaDetalle(0, 2, 1, "Queso Geo", 2, 200, 400));
+            factura.Detalle.Add(new FacturaDetalle(20, 15, 1, "Salami Induveca", 2, 150, 300));
             bool paso = repositorio.Modificar(factura);
             Assert.AreEqual(true, paso);
         }

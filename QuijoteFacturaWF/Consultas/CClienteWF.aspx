@@ -43,23 +43,25 @@
                     <asp:TextBox ID="HastaTextBox" class="form-control input-group" TextMode="Date" runat="server" />
                 </div>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <asp:Label ID="criterioLabel" runat="server" Text="" Font-Bold="True" ValidateRequestMode="Inherit" Font-Size="Large"></asp:Label>
-                    <div class="form-row justify-content-center">
-                        <asp:GridView ID="ClienteGridView" runat="server" class="table table-condensed table-bordered table-responsive" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
-                            <AlternatingRowStyle BackColor="LightSkyBlue" />
-                            <Columns>
-                                <asp:BoundField DataField="ClienteId" HeaderText="ClienteId" />
-                                <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
-                                <asp:BoundField DataField="Nombres" HeaderText="Nombre" />
-                                <asp:BoundField DataField="NoTelefono" HeaderText="NoTelefono" />
-                                <asp:BoundField DataField="NoCedula" HeaderText="NoCedula" />
-                                <asp:BoundField DataField="Direccion" HeaderText="Direccion" />
-                                <asp:BoundField DataField="Deuda" HeaderText="Deuda" />
-                            </Columns>
-                            <HeaderStyle BackColor="LightGreen" Font-Bold="True" />
-                        </asp:GridView>
+            <div class="table-responsive">
+                <div class="card">
+                    <div class="card-body">
+                        <asp:Label ID="criterioLabel" runat="server" Text="" Font-Bold="True" ValidateRequestMode="Inherit" Font-Size="Large"></asp:Label>
+                        <div class="form-row justify-content-center">
+                            <asp:GridView ID="ClienteGridView" runat="server" class="table table-condensed table-bordered table-responsive" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+                                <AlternatingRowStyle BackColor="LightSkyBlue" />
+                                <Columns>
+                                    <asp:BoundField DataField="ClienteId" HeaderText="ClienteId" />
+                                    <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
+                                    <asp:BoundField DataField="Nombres" HeaderText="Nombre" />
+                                    <asp:BoundField DataField="NoTelefono" HeaderText="NoTelefono" />
+                                    <asp:BoundField DataField="NoCedula" HeaderText="NoCedula" />
+                                    <asp:BoundField DataField="Direccion" HeaderText="Direccion" />
+                                    <asp:BoundField DataField="Deuda" HeaderText="Deuda" />
+                                </Columns>
+                                <HeaderStyle BackColor="LightGreen" Font-Bold="True" />
+                            </asp:GridView>
+                        </div>
                     </div>
                 </div>
             </div>

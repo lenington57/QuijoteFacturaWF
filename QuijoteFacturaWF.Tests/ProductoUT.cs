@@ -20,7 +20,7 @@ namespace QuijoteFacturaWF.Tests
             Producto producto = new Producto();
             bool paso = false;
 
-            producto.ProductoId = 2;
+            producto.ProductoId = 6;
             producto.FechaVencimiento = DateTime.Now;
             producto.DepartamentoId = 1;
             producto.Descripcion = "Queso Geo";
@@ -47,7 +47,7 @@ namespace QuijoteFacturaWF.Tests
 
         public Producto BuscarM()
         {
-            int id = 3;
+            int id = 6;
             Repositorio<Producto> repositorio = new Repositorio<Producto>();
             Producto producto = new Producto();
             producto = repositorio.Buscar(id);
@@ -58,7 +58,7 @@ namespace QuijoteFacturaWF.Tests
         public void Eliminar()
         {
             Repositorio<Producto> repositorio = new Repositorio<Producto>();
-            int id = 4;
+            int id = 6;
             bool paso = false;
             paso = repositorio.Eliminar(id);
             Assert.AreEqual(true, paso);

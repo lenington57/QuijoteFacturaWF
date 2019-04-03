@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CPagoWF.aspx.cs" Inherits="QuijoteFacturaWF.Consultas.CPagoWF" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -41,20 +42,22 @@
                     <asp:TextBox ID="HastaTextBox" class="form-control input-group" TextMode="Date" runat="server" />
                 </div>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <asp:Label ID="criterioLabel" runat="server" Text="" Font-Bold="True" ValidateRequestMode="Inherit" Font-Size="Large"></asp:Label>
-                    <div class="form-row justify-content-center">
-                        <asp:GridView ID="PagoGridView" runat="server" class="table table-condensed table-bordered table-responsive" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
-                            <AlternatingRowStyle BackColor="LightSkyBlue" />
-                            <Columns>
-                                <asp:BoundField DataField="PagoId" HeaderText="PagoId" />
-                                <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
-                                <asp:BoundField DataField="ClienteId" HeaderText="ClienteId" />
-                                <asp:BoundField DataField="Monto" HeaderText="Monto" />
-                            </Columns>
-                            <HeaderStyle BackColor="LightGreen" Font-Bold="True" />
-                        </asp:GridView>
+            <div class="table-responsive">
+                <div class="card">
+                    <div class="card-body">
+                        <asp:Label ID="criterioLabel" runat="server" Text="" Font-Bold="True" ValidateRequestMode="Inherit" Font-Size="Large"></asp:Label>
+                        <div class="form-row justify-content-center">
+                            <asp:GridView ID="PagoGridView" runat="server" class="table table-condensed table-bordered table-responsive" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+                                <AlternatingRowStyle BackColor="LightSkyBlue" />
+                                <Columns>
+                                    <asp:BoundField DataField="PagoId" HeaderText="PagoId" />
+                                    <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
+                                    <asp:BoundField DataField="ClienteId" HeaderText="ClienteId" />
+                                    <asp:BoundField DataField="Monto" HeaderText="Monto" />
+                                </Columns>
+                                <HeaderStyle BackColor="LightGreen" Font-Bold="True" />
+                            </asp:GridView>
+                        </div>
                     </div>
                 </div>
             </div>

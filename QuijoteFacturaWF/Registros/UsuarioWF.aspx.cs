@@ -15,6 +15,7 @@ namespace QuijoteFacturaWF.Registros
     {
         Repositorio<Usuario> repositorio = new Repositorio<Usuario>();
         Expression<Func<Usuario, bool>> filtrar = x => true;
+        Expression<Func<Usuario, bool>> filtro = x => true;
         protected void Page_Load(object sender, EventArgs e)
         {
             fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
@@ -50,6 +51,7 @@ namespace QuijoteFacturaWF.Registros
         public void LlenaCampos(Usuario usuario)
         {
             LimpiaObjetos();
+            usuarioIdTextBox.Text = usuario.UsuarioId.ToString();
             fechaTextBox.Text = usuario.Fecha.ToString("yyyy-MM-dd");
             nombreTextBox.Text = usuario.Nombres;
             noTelefonoTextBox.Text = usuario.NoTelefono;
@@ -93,6 +95,20 @@ namespace QuijoteFacturaWF.Registros
             if (String.IsNullOrWhiteSpace(usuarioIdTextBox.Text))
             {
                 Utils.ShowToastr(this, "Debe tener un Id para guardar", "Error", "error");
+                HayErrores = true;
+            }
+            filtrar = t => t.Email.Equals(emailTextBox.Text);
+
+            if (repositorio.GetList(filtrar).Count() != 0)
+            {
+                Utils.ShowToastr(this, "Este Email ya existe", "Error", "error");
+                HayErrores = true;
+            }
+            filtro = t => t.Nombres.Equals(nombreTextBox.Text);
+
+            if (repositorio.GetList(filtro).Count() != 0)
+            {
+                Utils.ShowToastr(this, "Este Nombre ya existe", "Error", "error");
                 HayErrores = true;
             }
             return HayErrores;

@@ -4,6 +4,7 @@ using QuijoteFacturaWF.Utilitarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -12,6 +13,9 @@ namespace QuijoteFacturaWF.Registros
 {
     public partial class ProductoWF : System.Web.UI.Page
     {
+        Repositorio<Producto> reposito = new Repositorio<Producto>();
+        Expression<Func<Producto, bool>> filtrar = x => true;
+        int idProd;
         protected void Page_Load(object sender, EventArgs e)
         {
             fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
@@ -59,6 +63,7 @@ namespace QuijoteFacturaWF.Registros
         public void LlenaCampos(Producto producto)
         {
             LimpiaObjetos();
+            productoIdTextBox.Text = producto.ProductoId.ToString();
             fechaTextBox.Text = producto.FechaVencimiento.ToString("yyyy-MM-dd");
             departamentoDropDownList.SelectedValue = producto.DepartamentoId.ToString();
             descripcionTextBox.Text = producto.Descripcion;
@@ -68,9 +73,25 @@ namespace QuijoteFacturaWF.Registros
             canInvTextBox.Text = producto.CantidadIventario.ToString();
         }
 
+        private bool VDescripcion()
+        {
+            bool HayErrores = false;
+            filtrar = t => t.Descripcion.Equals(descripcionTextBox.Text);
+
+            if (reposito.GetList(filtrar).Count() != 0)
+            {
+                Utils.ShowToastr(this, "Este Producto ya existe", "Error", "error");
+                HayErrores = true;
+            }
+            return HayErrores;
+        }
+
+
         private bool HayErrores()
         {
             bool HayErrores = false;
+            filtrar = t => t.Descripcion.Equals(descripcionTextBox.Text);
+
             if (Utils.ToIntObjetos(departamentoDropDownList.SelectedValue) < 1)
             {
                 Utils.ShowToastr(this, "Debe tener al menos un Departamento guardado", "Error", "error");
@@ -81,6 +102,11 @@ namespace QuijoteFacturaWF.Registros
                 Utils.ShowToastr(this, "Debe tener un Id para guardar", "Error", "error");
                 HayErrores = true;
             }
+            if (reposito.GetList(filtrar).Count() != 0)
+            {
+                Utils.ShowToastr(this, "Este Producto ya existe", "Error", "error");
+                HayErrores = true;
+            }
             return HayErrores;
         }
 
@@ -88,7 +114,7 @@ namespace QuijoteFacturaWF.Registros
         protected void BuscarLinkButton_Click(object sender, EventArgs e)
         {
             Repositorio<Producto> repositorio = new Repositorio<Producto>();
-
+            idProd = Utils.ToInt(productoIdTextBox.Text);
             var producto = repositorio.Buscar(Utils.ToInt(productoIdTextBox.Text));
             if (producto != null)
             {
@@ -113,6 +139,9 @@ namespace QuijoteFacturaWF.Registros
             Repositorio<Producto> repositorio = new Repositorio<Producto>();
             Producto producto = new Producto();
 
+            if (HayErrores())
+                return;
+            else { 
             producto = LlenaClase();
 
             if (productoIdTextBox.Text == "0")
@@ -142,6 +171,7 @@ namespace QuijoteFacturaWF.Registros
             }
             else
                 Utils.ShowToastr(this, "No se pudo guardar", "Error", "error");
+            }
         }
 
         protected void eliminarutton_Click(object sender, EventArgs e)

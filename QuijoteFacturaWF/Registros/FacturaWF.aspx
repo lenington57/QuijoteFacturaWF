@@ -104,22 +104,16 @@
                                         <asp:Label ID="criterioLabel" runat="server" Text="Detalle" Font-Bold="True" ValidateRequestMode="Inherit" Font-Size="Large"></asp:Label>
                                         <div class="form-row justify-content-center">
                                             <asp:GridView ID="detalleGridView" runat="server" class="table table-condensed table-bordered table-responsive"
-                                                AutoGenerateColumns="False" CellPadding="8" AllowPaging="True" PageSize="7" ForeColor="Black" GridLines="None"
-                                                BackColor="White" OnPageIndexChanging="detalleGridView_PageIndexChanging" OnSelectedIndexChanged="detalleGridView_SelectedIndexChanged">
+                                                 CellPadding="8" AllowPaging="True" PageSize="7" ForeColor="Black" GridLines="None"
+                                                BackColor="White" OnRowCommand="detalleGridView_RowCommand" OnPageIndexChanging="detalleGridView_PageIndexChanging">
                                                 <AlternatingRowStyle BackColor="White" />
                                                 <Columns>
                                                     <asp:TemplateField ShowHeader="False">
                                                         <ItemTemplate>
-                                                            <asp:Button ID="removerLinkButton" class="btn btn-danger btn-sm" runat="server" CausesValidation="False" CommandName="Select" Text="Remover" OnClick="removerButton_Click"></asp:Button>
+                                                            <asp:Button ID="removerLinkButton" class="btn btn-danger btn-sm" runat="server" CausesValidation="False" CommandName="Select" CommandArgument="<%#((GridViewRow) Container).DataItemIndex %>" Text="Remover" ></asp:Button>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
-                                                    <asp:BoundField DataField="Id" HeaderText="Id" />
-                                                    <asp:BoundField DataField="FacturaId" HeaderText="FacturaId" />
-                                                    <asp:BoundField DataField="ProductoId" HeaderText="ProductoId" />
-                                                    <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
-                                                    <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
-                                                    <asp:BoundField DataField="Precio" HeaderText="Precio" />
-                                                    <asp:BoundField DataField="Importe" HeaderText="Importe" />
+
                                                 </Columns>
                                                 <HeaderStyle BackColor="#009900" Font-Bold="True" />
                                             </asp:GridView>
@@ -190,27 +184,6 @@
                                         </rsweb:ReportViewer>
                                     </div>
                                     <div class="modal-footer">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Modal de confirmacion de eliminar-->
-                        <div class="modal fade bd-ejemplo-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-sm" role="document">
-                                <div class="modal-content ">
-                                    <div class="modal-header bg-danger">
-                                        <h5 class="modal-title">¡Atencion!</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Estas seguro de eliminar este Articulo?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <asp:Button ID="Eliminar" runat="server" CssClass="btn btn-danger" Text="Si" OnClick="removerButton_Click" />
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                                     </div>
                                 </div>
                             </div>

@@ -51,6 +51,7 @@ namespace QuijoteFacturaWF.Registros
         public void LlenaCampos(Pago pago)
         {
             LimpiaObjetos();
+            pagoIdTextBox.Text = pago.PagoId.ToString();
             fechaTextBox.Text = pago.Fecha.ToString("yyyy-MM-dd");
             clienteDropDownList.SelectedValue = pago.ClienteId.ToString();
             montoTextBox.Text = pago.Monto.ToString();

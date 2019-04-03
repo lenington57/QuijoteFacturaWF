@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -29,6 +30,7 @@ namespace QuijoteFacturaWF.Registros
                 LlenaReport();
             }
         }
+
         //Métodos
         private void LlenaCombo()
         {
@@ -68,7 +70,8 @@ namespace QuijoteFacturaWF.Registros
             Factura factura = new Factura();
 
             factura.FacturaId = Utils.ToInt(facturaIdTextBox.Text);
-            factura.Fecha = Convert.ToDateTime(fechaTextBox.Text).Date;
+            bool resultado = DateTime.TryParse(fechaTextBox.Text, out DateTime fecha);
+            factura.Fecha = fecha;
             factura.UsuarioId = Utils.ToIntObjetos(usuarioDropDownList.SelectedValue);
             factura.NombreUsuario = Metodos.Usuario(Utils.ToInt(usuarioDropDownList.SelectedValue));
             factura.ClienteId = Utils.ToIntObjetos(clienteDropDownList.SelectedValue);
@@ -110,11 +113,23 @@ namespace QuijoteFacturaWF.Registros
             totalTextBox.Text = "";
             detalleGridView.DataSource = null;
             detalleGridView.DataBind();
-        }
+        }        
 
         private bool HayErrores()
         {
             bool HayErrores = false;
+            Repositorio<Producto> repositorio = new Repositorio<Producto>();
+            Producto producto = new Producto();
+            int id = Utils.ToIntObjetos(productoDropDownList.SelectedValue);
+            int cant = 0;
+            producto = repositorio.Buscar(id);
+            cant = producto.CantidadIventario;
+
+            if (cant <= 0)
+            {
+                Utils.ShowToastr(this, "Producto agotado.", "Error", "error");
+                HayErrores = true;
+            }
 
             if (detalleGridView.Rows.Count == 0)
             {
@@ -236,40 +251,7 @@ namespace QuijoteFacturaWF.Registros
         //{
         //    LlenaValores();
         //}
-
-        private void Remover()
-        {
-            List<FacturaDetalle> list = Metodos.ListaDetalle(Utils.ToInt(facturaIdTextBox.Text));
-            //GridViewRow row = detalleGridView.SelectedRow;
-            //int fila = row.RowIndex;
-            list.RemoveAt(0);
-            detalleGridView.DataSource = list;
-            detalleGridView.DataBind();
-        }
-
-        protected void removerButton_Click(object sender, EventArgs e)
-        {
-            detalleGridView.DataSource = ViewState["Detalle"];
-            if (Utils.ToInt(facturaIdTextBox.Text) == 0)
-            {
-                list = (List<FacturaDetalle>)detalleGridView.DataSource;
-                Button btn = (Button)sender;
-                GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-                int indexdeboton = gvr.RowIndex;
-                list.RemoveAt(indexdeboton);
-                detalleGridView.DataSource = ViewState["Detalle"];
-                detalleGridView.DataBind();
-                LlenaValores();
-            }                
-            else
-            {
-                list = Metodos.ListaDetalle(Utils.ToInt(facturaIdTextBox.Text));
-                list.RemoveAt(row);
-                detalleGridView.DataSource = list;
-                detalleGridView.DataBind();
-                LlenaValores();
-            }
-        }
+        
 
         protected void cantidadTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -366,16 +348,27 @@ namespace QuijoteFacturaWF.Registros
             }
         }
 
-        protected void detalleGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void detalleGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            detalleGridView.DataSource = ViewState["FacturaDetalle"];
-            detalleGridView.PageIndex = e.NewPageIndex;
-            detalleGridView.DataBind();
+            if (e.CommandName == "Select")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                Expression<Func<Producto, bool>> filtro = p => true;
+                Repositorio<Producto> repositorio = new Repositorio<Producto>();
+                var lista = repositorio.GetList(c => true);
+                var combos = repositorio.Buscar(lista[index].ProductoId);
+                ((List<FacturaDetalle>)ViewState["Detalle"]).RemoveAt(index);
+                detalleGridView.DataSource = ViewState["Detalle"];
+                detalleGridView.DataBind();
+                LlenaValores();
+            }
         }
 
-        protected void detalleGridView_SelectedIndexChanged(object sender, EventArgs e)
+        protected void detalleGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            row = Utils.ToIntObjetos(detalleGridView.SelectedDataKey.Value);
+            detalleGridView.DataSource = ViewState["Detalle"];
+            detalleGridView.PageIndex = e.NewPageIndex;
+            detalleGridView.DataBind();
         }
     }
 

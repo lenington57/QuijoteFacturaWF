@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DepartamentoWF.aspx.cs" Inherits="QuijoteFacturaWF.Registros.DepartamentoWF" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -9,10 +10,13 @@
                 <div class="card-header text-uppercase text-center text-primary">Departamento</div>
                 <article class="card-body">
                     <form>
-                        <div class="form-row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-row">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class="form-group col-md-3">
                                 <asp:Label ID="Label2" runat="server" Text="Id"></asp:Label>
                                 <asp:TextBox class="form-control" ID="departamentoIdTextBox" Text="0" type="number" runat="server" Width="110px"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="IdRFV" runat="server" ErrorMessage="No puede estar vacío" ControlToValidate="departamentoIdTextBox" Display="Dynamic" ForeColor="Red" ValidationGroup="Guardar">*No puede estar vacío</asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="IdREV" runat="server" ErrorMessage="Solo Números" ForeColor="Red" ValidationExpression="^[0-9]*$" ControlToValidate="departamentoIdTextBox" ValidationGroup="Guardar">Solo Números</asp:RegularExpressionValidator>
                             </div>
 
                             <div class="col-lg-1 p-0">

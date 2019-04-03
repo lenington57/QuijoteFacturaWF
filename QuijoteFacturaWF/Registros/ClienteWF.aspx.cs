@@ -14,6 +14,7 @@ namespace QuijoteFacturaWF.Registros
     public partial class ClienteWF : System.Web.UI.Page
     {
         Repositorio<Cliente> repositorio = new Repositorio<Cliente>();
+        Expression<Func<Cliente, bool>> filtro = x => true;
         Expression<Func<Cliente, bool>> filtrar = x => true;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,7 +27,8 @@ namespace QuijoteFacturaWF.Registros
             Cliente cliente = new Cliente();
 
             cliente.ClienteId = Utils.ToInt(clienteIdTextBox.Text);
-            cliente.Fecha = Utils.ToDateTime(fechaTextBox.Text).Date;
+            bool resultado = DateTime.TryParse(fechaTextBox.Text, out DateTime fecha);
+            cliente.Fecha = fecha;
             cliente.Nombres = nombreTextBox.Text;
             cliente.NoTelefono = noTelefonoTextBox.Text;
             cliente.NoCedula = noCedulaTextBox.Text;
@@ -50,6 +52,7 @@ namespace QuijoteFacturaWF.Registros
         public void LlenaCampos(Cliente cliente)
         {
             LimpiaObjetos();
+            clienteIdTextBox.Text = cliente.ClienteId.ToString();
             fechaTextBox.Text = cliente.Fecha.ToString("yyyy-MM-dd");
             nombreTextBox.Text = cliente.Nombres;
             noTelefonoTextBox.Text = cliente.NoTelefono;
@@ -74,6 +77,19 @@ namespace QuijoteFacturaWF.Registros
         private bool HayErrores()
         {
             bool HayErrores = false;
+            filtrar = t => t.NoCedula.Equals(noCedulaTextBox.Text);
+            filtro = t => t.Nombres.Equals(nombreTextBox.Text);
+
+            if (repositorio.GetList(filtrar).Count() != 0)
+            {
+                Utils.ShowToastr(this, "Esta Cédula ya existe", "Error", "error");
+                HayErrores = true;
+            }
+            if (repositorio.GetList(filtro).Count() != 0)
+            {
+                Utils.ShowToastr(this, "Este Nombre ya existe", "Error", "error");
+                HayErrores = true;
+            }
             if (noTelefonoTextBox.Text.Length !=10)
             {
                 Utils.ShowToastr(this, "No es un Número de Teléfono correcto", "Error", "error");

@@ -17,7 +17,7 @@ namespace QuijoteFacturaWF.Tests
             Usuario usuario = new Usuario();
             bool paso = false;
 
-            usuario.UsuarioId = 2;
+            usuario.UsuarioId = 3;
             usuario.Fecha = DateTime.Now;
             usuario.Nombres = "Avatar";
             usuario.NoTelefono = "8098971234";
@@ -54,7 +54,7 @@ namespace QuijoteFacturaWF.Tests
         public void Eliminar()
         {
             Repositorio<Usuario> repositorio = new Repositorio<Usuario>();
-            int id = 4;
+            int id = 3;
             bool paso = false;
             paso = repositorio.Eliminar(id);
             Assert.AreEqual(true, paso);
