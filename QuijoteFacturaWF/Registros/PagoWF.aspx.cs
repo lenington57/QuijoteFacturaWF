@@ -14,8 +14,11 @@ namespace QuijoteFacturaWF.Registros
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
-            LlenaCombo();
+            if (!Page.IsPostBack)
+            {
+                fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                LlenaCombo();
+            }
         }
 
         //Métodos
@@ -33,7 +36,8 @@ namespace QuijoteFacturaWF.Registros
             Pago pago = new Pago();
 
             pago.PagoId = Utils.ToInt(pagoIdTextBox.Text);
-            pago.Fecha = Utils.ToDateTime(fechaTextBox.Text).Date;
+            bool resultado = DateTime.TryParse(fechaTextBox.Text, out DateTime fecha);
+            pago.Fecha = fecha;
             pago.ClienteId = Utils.ToInt(clienteDropDownList.SelectedValue);
             pago.Monto = Utils.ToInt(montoTextBox.Text);
 

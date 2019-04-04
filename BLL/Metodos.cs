@@ -262,9 +262,9 @@ namespace BLL
                 case 2://ClienteId
                     filtro = p => p.ClienteId == id && p.Fecha >= desde && p.Fecha <= hasta;
                     break;
-                    
-                case 3://Monto
-                    filtro = p => p.Monto.Equals(monto) && p.Fecha >= desde && p.Fecha <= hasta;
+
+                case 3://PagoId
+                    filtro = p => p.PagoId == id && p.Fecha >= desde && p.Fecha <= hasta;
                     break;
             }
 

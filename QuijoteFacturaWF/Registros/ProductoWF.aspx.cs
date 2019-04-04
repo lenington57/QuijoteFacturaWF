@@ -38,7 +38,8 @@ namespace QuijoteFacturaWF.Registros
 
             producto.ProductoId = Utils.ToInt(productoIdTextBox.Text);
             producto.DepartamentoId = Utils.ToInt(departamentoDropDownList.SelectedValue);
-            producto.FechaVencimiento = Utils.ToDateTime(fechaTextBox.Text).Date;
+            bool resultado = DateTime.TryParse(fechaTextBox.Text, out DateTime fecha);
+            producto.FechaVencimiento = fecha;
             producto.Descripcion = descripcionTextBox.Text;
             producto.Costo = Utils.ToInt(costoTextBox.Text);
             producto.Precio = Utils.ToInt(precioTextBox.Text);

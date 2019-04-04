@@ -143,11 +143,13 @@
     <Content Include="Content\Login\vendor\select2\select2.min.css" />
     <Content Include="Content\Login\vendor\select2\select2.min.js" />
     <Content Include="Content\Login\vendor\tilt\tilt.jquery.min.js" />
+    <Content Include="Content\Quixote03.jpg" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
+    <Content Include="Logon.aspx" />
     <Content Include="Registros\ClienteWF.aspx" />
     <Content Include="Registros\DepartamentoWF.aspx" />
     <Content Include="Registros\EntradaWF.aspx" />
@@ -162,6 +164,7 @@
     <Content Include="Resources\im-html-o3884083.jpg" />
     <Content Include="Resources\mejores-herramientas-factuacion-electronica-810x607.jpg" />
     <Content Include="Resources\new-product-seal_23-2147503128.jpg" />
+    <Content Include="Resources\Quixote03.jpg" />
     <Content Include="Resources\Usuario.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -489,6 +492,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logon.aspx.cs">
+      <DependentUpon>Logon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logon.aspx.designer.cs">
+      <DependentUpon>Logon.aspx</DependentUpon>
     </Compile>
     <Compile Include="PagoDataSet.Designer.cs">
       <AutoGen>True</AutoGen>

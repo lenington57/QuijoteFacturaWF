@@ -17,7 +17,7 @@ namespace QuijoteFacturaWF.Tests
             Usuario usuario = new Usuario();
             bool paso = false;
 
-            usuario.UsuarioId = 3;
+            usuario.UsuarioId = 6;
             usuario.Fecha = DateTime.Now;
             usuario.Nombres = "Avatar";
             usuario.NoTelefono = "8098971234";
@@ -43,7 +43,7 @@ namespace QuijoteFacturaWF.Tests
 
         public Usuario BuscarM()
         {
-            int id = 3;
+            int id = 2;
             Repositorio<Usuario> repositorio = new Repositorio<Usuario>();
             Usuario cuenta = new Usuario();
             cuenta = repositorio.Buscar(id);
@@ -54,7 +54,7 @@ namespace QuijoteFacturaWF.Tests
         public void Eliminar()
         {
             Repositorio<Usuario> repositorio = new Repositorio<Usuario>();
-            int id = 3;
+            int id = 5;
             bool paso = false;
             paso = repositorio.Eliminar(id);
             Assert.AreEqual(true, paso);
@@ -63,7 +63,7 @@ namespace QuijoteFacturaWF.Tests
         [TestMethod]
         public void Buscar()
         {
-            int id = 3;
+            int id = 4;
             Repositorio<Usuario> repositorio = new Repositorio<Usuario>();
             Usuario usuario = new Usuario();
             usuario = repositorio.Buscar(id);

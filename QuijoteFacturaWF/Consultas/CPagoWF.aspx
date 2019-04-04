@@ -16,7 +16,7 @@
                         <asp:ListItem>Todo</asp:ListItem>
                         <asp:ListItem>Todo por Fecha</asp:ListItem>
                         <asp:ListItem>Id del Cliente</asp:ListItem>
-                        <asp:ListItem>Monto</asp:ListItem>
+                        <asp:ListItem>Id del Pago</asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <%--Criterio--%>

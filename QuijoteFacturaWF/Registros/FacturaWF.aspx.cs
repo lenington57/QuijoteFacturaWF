@@ -196,27 +196,7 @@ namespace QuijoteFacturaWF.Registros
             subtotalTextBox.Text = SubTotal.ToString();
             itbisTextBox.Text = Itbis.ToString();
             totalTextBox.Text = total.ToString();
-        }
-
-        private void RebajaValores()
-        {
-            RepositorioFactura repositorio = new RepositorioFactura();
-            int total = 0;
-            List<FacturaDetalle> lista = (List<FacturaDetalle>)ViewState["FacturaDetalle"];
-            foreach (var item in lista)
-            {
-                total += item.Importe;
-            }
-            total *= (-1);
-            double Itbis = 0;
-            double SubTotal = 0;
-            Itbis = total * 0.18f;
-            SubTotal = total - Itbis;
-            subtotalTextBox.Text = SubTotal.ToString();
-            itbisTextBox.Text = Itbis.ToString();
-            totalTextBox.Text = total.ToString();
-        }
-
+        }        
 
         //Programación de los Botones
         protected void agregarLinkButton_Click(object sender, EventArgs e)
@@ -245,13 +225,7 @@ namespace QuijoteFacturaWF.Registros
                 detalleGridView.DataBind();
                 LlenaValores();
             }
-        }
-
-        //protected void CalcularLinkButton_Click(object sender, EventArgs e)
-        //{
-        //    LlenaValores();
-        //}
-        
+        }        
 
         protected void cantidadTextBox_TextChanged(object sender, EventArgs e)
         {

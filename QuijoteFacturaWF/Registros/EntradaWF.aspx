@@ -63,5 +63,4 @@
             <!-- card.// -->
     </div>
     <br>
-    </div>
 </asp:Content>

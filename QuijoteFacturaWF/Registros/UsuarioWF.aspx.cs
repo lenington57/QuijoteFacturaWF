@@ -27,7 +27,8 @@ namespace QuijoteFacturaWF.Registros
             Usuario usuario = new Usuario();
 
             usuario.UsuarioId = Utils.ToInt(usuarioIdTextBox.Text);
-            usuario.Fecha = Utils.ToDateTime(fechaTextBox.Text).Date;
+            bool resultado = DateTime.TryParse(fechaTextBox.Text, out DateTime fecha);
+            usuario.Fecha = fecha;
             usuario.Nombres = nombreTextBox.Text;            
             usuario.NoTelefono = noTelefonoTextBox.Text;
             usuario.Email = emailTextBox.Text;
